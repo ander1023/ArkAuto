@@ -20,7 +20,7 @@ class MainUI(QMainWindow):
         super(MainUI, self).__init__()
         self.initUI()
         self.initThread()
-        self.initHitokoto()
+        #self.initHitokoto()
         # self.connectThread = None,
         # self.launchGameThread = None,
         # self.exp_5Thread = None
@@ -39,56 +39,55 @@ class MainUI(QMainWindow):
         self.lgT = launchGameThread()
         self.e5T = exp_5Thread()
         self.haT = HitokotoApiThread()
-
+    def closeAllThare(self):
+        self.cdT.quit()
+        self.lgT.quit()
+        self.e5T.quit()
+        self.haT.quit()
     def initHitokoto(self):
         self.haT.start()
-        self.haT.sinOut.connect(self.haT_changeLable)
+        self.haT.sinOut.connect(self.HitokotoThread_callback)
 
     def btEven(self):
         global isConnect
         if self.sender().text() == '连接设备':
             self.cdT.start()
-            self.ui.stateLable.setText('正在连接...')
-            self.cdT.sinOut.connect(self.cdT_isConnect)
+            self.setLogLable('正在连接')
+            self.cdT.sinOut.connect(self.ConnectDevThread_callback)
         if self.sender().text() == '启动游戏':
             if not isConnect:
+                self.setLogLable('请连接后重试')
                 return
+            self.setLogLable('正在进入游戏')
             self.lgT.start()
         if self.sender().text() == '开始刷本':
             if not isConnect:
+                self.setLogLable('请连接后重试')
                 return
+            self.setLogLable('正在自动刷本')
             self.e5T.start()
 
-    def cdT_isConnect(self, inf):
+    def ConnectDevThread_callback(self, inf):
         global isConnect
         if inf:
-            self.ui.stateLable.setText("设备已连接")
+            self.setLogLable('设备已连接')
             isConnect = True
         else:
-            self.ui.stateLable.setText("设备未连接")
+            self.setLogLable('设备未连接')
             isConnect = False
 
-    def haT_changeLable(self, inf):
+    def HitokotoThread_callback(self, inf):
         self.ui.hitokotoLable.setText(inf)
 
     #------------------------------------tools-----------------------------------
-    def changeLogLable(self,str):
-        self.ui.logLable.setText(str)
-    # -----------------------------------fun-----------------------------------
-    # def launchGame(self):
-    #     ut.startapp('com.hypergryph.arknights')
-    #     while True:
-    #         if ut.img_match('加载'):
-    #             ut.touchName('加载')
-    #             break
-    #         ut.sleep()
-    #     while True:
-    #         if ut.img_match('开始唤醒'):
-    #             ut.sleep(5)
-    #             ut.touchName('开始唤醒')
-    #             break
-    #         ut.sleep()
-    #     print('loading DONE')
+    def setLogLable(self, str):
+        global isConnect
+        if not isConnect:
+            self.ui.logLable.setText('status:未连接|' + str)
+        else:
+            self.ui.logLable.setText('status:已连接|' + str)
+
+    # -----------------------------------Thread-----------------------------------
 
 
 class exp_5Thread(QThread):
@@ -204,8 +203,6 @@ class HitokotoApiThread(QThread):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     ui = MainUI()
-    # ui.setWindowFlags(Qt.WindowCloseButtonHint)
-
     ui.setFixedSize(ui.width(), ui.height())
     ui.show()
     sys.exit(app.exec_())

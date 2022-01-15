@@ -34,12 +34,6 @@ class Ui_MainWindow(object):
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
-        self.stateLable = QtWidgets.QLabel(self.frame)
-        self.stateLable.setGeometry(QtCore.QRect(150, 204, 100, 30))
-        self.stateLable.setStyleSheet("*{background:rgba(153,204,255,0.6);border-radius:5px}")
-        self.stateLable.setAlignment(QtCore.Qt.AlignCenter)
-        self.stateLable.setWordWrap(False)
-        self.stateLable.setObjectName("stateLable")
         self.layoutWidget = QtWidgets.QWidget(self.frame)
         self.layoutWidget.setGeometry(QtCore.QRect(80, 244, 239, 32))
         self.layoutWidget.setObjectName("layoutWidget")
@@ -68,6 +62,7 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.logLable.setFont(font)
         self.logLable.setStyleSheet("*{color:black;border-radius:10px;font-size:10px}")
+        self.logLable.setText("")
         self.logLable.setAlignment(QtCore.Qt.AlignCenter)
         self.logLable.setObjectName("logLable")
         MainWindow.setCentralWidget(self.centralwidget)
@@ -78,10 +73,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.stateLable.setText(_translate("MainWindow", "设备未连接"))
         self.devConnectBt.setText(_translate("MainWindow", "连接设备"))
         self.startGameBt.setText(_translate("MainWindow", "启动游戏"))
         self.expMapBt.setText(_translate("MainWindow", "开始刷本"))
         self.hitokotoLable.setText(_translate("MainWindow", "一言"))
-        self.logLable.setText(_translate("MainWindow", "TextLabel"))
 import ui_rc
