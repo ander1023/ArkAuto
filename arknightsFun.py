@@ -11,6 +11,7 @@ class ADBTOOL:
             utils.ut.sleep()
         while True:
             if utils.ut.img_match('开始唤醒'):
+                utils.ut.sleep()
                 utils.ut.touchName('开始唤醒')
                 break
             utils.ut.sleep()
@@ -40,27 +41,26 @@ class ADBTOOL:
             utils.ut.touchName('战斗准备')
             utils.ut.sleep()
 
-            if utils.ut.img_match('理智界面'):#todo 图片位置等待修改
+            if utils.ut.img_match('理智界面'):
                 utils.ut.sleep()
                 utils.ut.touchName('理智界面x')
                 utils.ut.sleep()
                 if self.returnHome():
-                    print('返回首页')
+                    print('理智已用完')
                     return
                 else :
-                    print('结束挂机')
+                    print('理智已用完')
                     return
-
-            utils.ut.touchName('战斗准备')
             utils.ut.sleep()
+            utils.ut.touchName('战斗准备')
             while True:
                 utils.ut.sleep()
                 print('等待战斗完成')
                 if utils.ut.img_match('战斗完成'):
                     break
-            utils.ut.sleep(5)
-            utils.ut.touchName('战斗完成')
             utils.ut.sleep(10)
+            utils.ut.touchName('战斗完成')
+            utils.ut.sleep()
     def returnHome(self):
         utils.ut.sleep()
         if utils.ut.img_match('bar首页'):
@@ -78,7 +78,7 @@ class ADBTOOL:
 
 if __name__ == "__main__":
     A = ADBTOOL()
-    # A.loading()
+    A.loading()
     A.normal()
 
 

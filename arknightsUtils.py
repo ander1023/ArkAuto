@@ -5,6 +5,7 @@ from airtest.core.android.android import Android
 from airtest.core.api import *
 import time
 import arknightsData as database
+import random
 
 
 class Utils:
@@ -26,7 +27,7 @@ class Utils:
         self.__dev.start_app(name, activity=None)
 
     def sleep(self, second=3):
-        time.sleep(second)
+        time.sleep(second + random.random()*2)
 
     def touchName(self, name):
         x = database.CM[name][0]
