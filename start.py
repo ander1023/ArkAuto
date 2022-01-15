@@ -1,20 +1,20 @@
 import time
 
 from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import QThread,pyqtSignal,Qt
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow,QMessageBox
+from PyQt5.QtCore import QThread, pyqtSignal, Qt
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QMessageBox
 from arknightsUI import Ui_MainWindow
 from arknightsUtils import ut
 
-from HitokotoApi import  getHitokotoText
+from HitokotoApi import getHitokotoText
 
 import sys
-from threading import  Thread
+from threading import Thread
 
 
 # pyuic5 -o test.py test.ui
 # pyrcct -o test.py test.qrc
-
+isConnect = False
 class MainUI(QMainWindow):
     def __init__(self):
         super(MainUI, self).__init__()
@@ -45,22 +45,35 @@ class MainUI(QMainWindow):
         self.haT.sinOut.connect(self.haT_changeLable)
 
     def btEven(self):
+        global isConnect
         if self.sender().text() == '连接设备':
             self.cdT.start()
+            self.ui.stateLable.setText('正在连接...')
             self.cdT.sinOut.connect(self.cdT_isConnect)
         if self.sender().text() == '启动游戏':
+            if not isConnect:
+                return
             self.lgT.start()
         if self.sender().text() == '开始刷本':
+            if not isConnect:
+                return
             self.e5T.start()
-    def cdT_isConnect(self,inf):
+
+    def cdT_isConnect(self, inf):
+        global isConnect
         if inf:
-            self.ui.label.setText("设备已连接")
+            self.ui.stateLable.setText("设备已连接")
+            isConnect = True
         else:
-            self.ui.label.setText("设备未连接")
-    def haT_changeLable(self,inf):
-        self.ui.label_2.setText(inf)
+            self.ui.stateLable.setText("设备未连接")
+            isConnect = False
 
+    def haT_changeLable(self, inf):
+        self.ui.hitokotoLable.setText(inf)
 
+    #------------------------------------tools-----------------------------------
+    def changeLogLable(self,str):
+        self.ui.logLable.setText(str)
     # -----------------------------------fun-----------------------------------
     # def launchGame(self):
     #     ut.startapp('com.hypergryph.arknights')
@@ -76,6 +89,8 @@ class MainUI(QMainWindow):
     #             break
     #         ut.sleep()
     #     print('loading DONE')
+
+
 class exp_5Thread(QThread):
     def __init__(self):
         super(exp_5Thread, self).__init__()
@@ -137,19 +152,24 @@ class exp_5Thread(QThread):
         else:
             return False
 
+
 class connectDevThread(QThread):
     sinOut = pyqtSignal(bool)
+
     def __init__(self):
         super(connectDevThread, self).__init__()
+
     def run(self):
         if ut.connectDev():
             self.sinOut.emit(True)
         else:
             self.sinOut.emit(False)
 
+
 class launchGameThread(QThread):
     def __init__(self):
         super(launchGameThread, self).__init__()
+
     def run(self):
         ut.startapp('com.hypergryph.arknights')
         while True:
@@ -165,18 +185,20 @@ class launchGameThread(QThread):
             ut.sleep()
         print('loading DONE')
 
+
 class HitokotoApiThread(QThread):
     sinOut = pyqtSignal(str)
+
     def __init__(self):
         super(HitokotoApiThread, self).__init__()
+
     def run(self):
         while True:
-            ut.sleep(3)
-            str = getHitokotoText()
-            self.sinOut.emit(str)
-            print(str)
+            time.sleep(1.7)
+            textStr = getHitokotoText()
+            self.sinOut.emit(textStr)
+            # print(textStr)
             ut.sleep(13)
-
 
 
 if __name__ == "__main__":
