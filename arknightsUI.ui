@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>390</width>
+    <height>290</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -38,7 +38,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">QFrame{background-image: url(:/新前缀/ui_img/background.png);}
+     <string notr="true">QFrame{background-image: url(:/新前缀/ui_img/background.png);border:none}
 
 QLabel{color:#fff;background:transparent;font-size:14px;font-weight:bold}
 
@@ -55,10 +55,13 @@ QPushButton:pressed{background-color:rgba(255,255,255,0.5);}</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>5</y>
+       <y>8</y>
        <width>80</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">*{background:rgba(153,204,255,0.6)}</string>
      </property>
      <property name="text">
       <string>设备未连接</string>
@@ -96,6 +99,25 @@ QPushButton:pressed{background-color:rgba(255,255,255,0.5);}</string>
        </widget>
       </item>
      </layout>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>381</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">*{background:rgba(255,255,255,0.7);color:rgb(0,0,0);border-radius:10px}</string>
+     </property>
+     <property name="text">
+      <string>一言</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
    </widget>
   </widget>

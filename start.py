@@ -1,37 +1,188 @@
-from PyQt5.QtWidgets import  QApplication,QWidget,QMainWindow
+import time
+
+from PyQt5.QtGui import QIcon
+from PyQt5.QtCore import QThread,pyqtSignal,Qt
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
 from arknightsUI import Ui_MainWindow
+from arknightsUtils import ut
+
+from HitokotoApi import  getHitokotoText
+
 import sys
-from arknightsFun import fun
-import threading
-#pyuic5 -o test.py test.ui
+from threading import  Thread
+
+
+# pyuic5 -o test.py test.ui
+# pyrcct -o test.py test.qrc
+
 class MainUI(QMainWindow):
     def __init__(self):
-
-        super().__init__()
+        super(MainUI, self).__init__()
         self.initUI()
-        self.show()
-
+        self.initThread()
+        self.initHitokoto()
+        # self.connectThread = None,
+        # self.launchGameThread = None,
+        # self.exp_5Thread = None
 
     def initUI(self):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.setWindowTitle('Arknights ADB Auto')
-        self.ui.expMapBt.clicked.connect(self.expMapBt)
-        self.ui.devConnectBt.clicked.connect(self.devConnectBt)
+        self.setWindowTitle('Arknights by大山猛')
+        self.setWindowIcon(QIcon('ui_img/icon.jpg'))
+        self.ui.expMapBt.clicked.connect(self.btEven)
+        self.ui.devConnectBt.clicked.connect(self.btEven)
+        self.ui.startGameBt.clicked.connect(self.btEven)
 
-    def devConnectBt(self,bt):
-        threading.Thread(target=lambda :fun.connectDev()).start()
-    def expMapBt(self,bt):
-        # pass
-        threading.Thread(target=lambda : fun.normal()).start()
+    def initThread(self):
+        self.cdT = connectDevThread()
+        self.lgT = launchGameThread()
+        self.e5T = exp_5Thread()
+        self.haT = HitokotoApiThread()
 
-    def startGame(self,bt):
-        # pass
-        threading.Thread(target=lambda :fun.startGame()).start()
+    def initHitokoto(self):
+        self.haT.start()
+        self.haT.sinOut.connect(self.haT_changeLable)
+
+    def btEven(self):
+        if self.sender().text() == '连接设备':
+            self.cdT.start()
+            self.cdT.sinOut.connect(self.cdT_isConnect)
+        if self.sender().text() == '启动游戏':
+            self.lgT.start()
+        if self.sender().text() == '开始刷本':
+            self.e5T.start()
+    def cdT_isConnect(self,inf):
+        if inf:
+            self.ui.label.setText("设备已连接")
+        else:
+            self.ui.label.setText("设备未连接")
+    def haT_changeLable(self,inf):
+        self.ui.label_2.setText(inf)
+
+
+    # -----------------------------------fun-----------------------------------
+    # def launchGame(self):
+    #     ut.startapp('com.hypergryph.arknights')
+    #     while True:
+    #         if ut.img_match('加载'):
+    #             ut.touchName('加载')
+    #             break
+    #         ut.sleep()
+    #     while True:
+    #         if ut.img_match('开始唤醒'):
+    #             ut.sleep(5)
+    #             ut.touchName('开始唤醒')
+    #             break
+    #         ut.sleep()
+    #     print('loading DONE')
+class exp_5Thread(QThread):
+    def __init__(self):
+        super(exp_5Thread, self).__init__()
+
+    def run(self):
+        while True:
+            if ut.img_match('主页设置按钮'):
+                ut.touchName('终端')
+                ut.sleep()
+                break
+            elif self.returnHome():
+                pass
+            else:
+                print('无法找到主页')
+
+        ut.touchName('日常子界面')
+        ut.sleep()
+        ut.touchName('战术演习')
+        ut.sleep()
+        ut.touchName('ls5')
+        ut.sleep()
+        # for i in range():
+        while True:
+            ut.touchName('战斗准备')
+            ut.sleep()
+
+            if ut.img_match('理智界面'):
+                ut.sleep()
+                ut.touchName('理智界面x')
+                ut.sleep()
+                if self.returnHome():
+                    print('理智已用完')
+                    return
+                else:
+                    print('理智已用完')
+                    return
+            ut.sleep()
+            ut.touchName('战斗准备')
+            while True:
+                ut.sleep()
+                print('等待战斗完成')
+                if ut.img_match('战斗完成'):
+                    break
+            ut.sleep(10)
+            ut.touchName('战斗完成')
+            ut.sleep()
+
+    def returnHome(self):
+        ut.sleep()
+        if ut.img_match('bar首页'):
+            ut.touchName('bar首页')
+            return True
+        elif ut.img_match('barhome'):
+            ut.touchName('barhome')
+            ut.sleep()
+            ut.touchName('bar首页')
+            ut.sleep()
+            return True
+        else:
+            return False
+
+class connectDevThread(QThread):
+    sinOut = pyqtSignal(bool)
+    def __init__(self):
+        super(connectDevThread, self).__init__()
+    def run(self):
+        if ut.connectDev():
+            self.sinOut.emit(True)
+        else:
+            self.sinOut.emit(False)
+
+class launchGameThread(QThread):
+    def __init__(self):
+        super(launchGameThread, self).__init__()
+    def run(self):
+        ut.startapp('com.hypergryph.arknights')
+        while True:
+            if ut.img_match('加载'):
+                ut.touchName('加载')
+                break
+            ut.sleep()
+        while True:
+            if ut.img_match('开始唤醒'):
+                ut.sleep(5)
+                ut.touchName('开始唤醒')
+                break
+            ut.sleep()
+        print('loading DONE')
+
+class HitokotoApiThread(QThread):
+    sinOut = pyqtSignal(str)
+    def __init__(self):
+        super(HitokotoApiThread, self).__init__()
+    def run(self):
+        while True:
+            str = getHitokotoText()
+            self.sinOut.emit(str)
+            print(str)
+            ut.sleep(4)
 
 
 
-app = QApplication(sys.argv)
 if __name__ == "__main__":
+    app = QApplication(sys.argv)
     ui = MainUI()
+    # ui.setWindowFlags(Qt.WindowCloseButtonHint)
+
+    ui.setFixedSize(ui.width(), ui.height())
+    ui.show()
     sys.exit(app.exec_())

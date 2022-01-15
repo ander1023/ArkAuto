@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '.\arknightsUI.ui'
+# Form implementation generated from reading ui file 'arknightsUI.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -15,7 +15,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
-        MainWindow.resize(400, 300)
+        MainWindow.resize(390, 290)
         MainWindow.setStyleSheet("")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         font = QtGui.QFont()
@@ -25,7 +25,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         self.frame = QtWidgets.QFrame(self.centralwidget)
         self.frame.setGeometry(QtCore.QRect(0, 0, 400, 300))
-        self.frame.setStyleSheet("QFrame{background-image: url(:/新前缀/ui_img/background.png);}\n"
+        self.frame.setStyleSheet("QFrame{background-image: url(:/新前缀/ui_img/background.png);border:none}\n"
 "\n"
 "QLabel{color:#fff;background:transparent;font-size:14px;font-weight:bold}\n"
 "\n"
@@ -35,7 +35,8 @@ class Ui_MainWindow(object):
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
         self.label = QtWidgets.QLabel(self.frame)
-        self.label.setGeometry(QtCore.QRect(10, 5, 80, 20))
+        self.label.setGeometry(QtCore.QRect(10, 8, 80, 20))
+        self.label.setStyleSheet("*{background:rgba(153,204,255,0.6)}")
         self.label.setObjectName("label")
         self.layoutWidget = QtWidgets.QWidget(self.frame)
         self.layoutWidget.setGeometry(QtCore.QRect(80, 244, 239, 32))
@@ -52,6 +53,11 @@ class Ui_MainWindow(object):
         self.expMapBt = QtWidgets.QPushButton(self.layoutWidget)
         self.expMapBt.setObjectName("expMapBt")
         self.horizontalLayout.addWidget(self.expMapBt)
+        self.label_2 = QtWidgets.QLabel(self.frame)
+        self.label_2.setGeometry(QtCore.QRect(10, 30, 381, 81))
+        self.label_2.setStyleSheet("*{background:rgba(255,255,255,0.7);color:rgb(0,0,0);border-radius:10px}")
+        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_2.setObjectName("label_2")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -64,4 +70,5 @@ class Ui_MainWindow(object):
         self.devConnectBt.setText(_translate("MainWindow", "连接设备"))
         self.startGameBt.setText(_translate("MainWindow", "启动游戏"))
         self.expMapBt.setText(_translate("MainWindow", "开始刷本"))
+        self.label_2.setText(_translate("MainWindow", "一言"))
 import ui_rc
