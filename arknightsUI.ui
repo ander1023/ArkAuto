@@ -103,7 +103,7 @@ QPushButton:pressed{background-color:rgba(255,255,255,0.5);}</string>
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>10</x>
+       <x>4</x>
        <y>30</y>
        <width>381</width>
        <height>81</height>
@@ -117,6 +117,9 @@ QPushButton:pressed{background-color:rgba(255,255,255,0.5);}</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
+     </property>
+     <property name="margin">
+      <number>10</number>
      </property>
     </widget>
    </widget>

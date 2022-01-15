@@ -54,7 +54,7 @@ class Ui_MainWindow(object):
         self.expMapBt.setObjectName("expMapBt")
         self.horizontalLayout.addWidget(self.expMapBt)
         self.label_2 = QtWidgets.QLabel(self.frame)
-        self.label_2.setGeometry(QtCore.QRect(10, 30, 381, 81))
+        self.label_2.setGeometry(QtCore.QRect(4, 30, 381, 81))
         self.label_2.setStyleSheet("*{background:rgba(255,255,255,0.7);color:rgb(0,0,0);border-radius:10px}")
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")

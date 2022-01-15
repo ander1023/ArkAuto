@@ -2,7 +2,7 @@ import time
 
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QThread,pyqtSignal,Qt
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow,QMessageBox
 from arknightsUI import Ui_MainWindow
 from arknightsUtils import ut
 
@@ -171,10 +171,11 @@ class HitokotoApiThread(QThread):
         super(HitokotoApiThread, self).__init__()
     def run(self):
         while True:
+            ut.sleep(3)
             str = getHitokotoText()
             self.sinOut.emit(str)
             print(str)
-            ut.sleep(4)
+            ut.sleep(13)
 
 
 
