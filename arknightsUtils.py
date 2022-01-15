@@ -11,15 +11,18 @@ import random
 class Utils:
     def __init__(self):
         self.__dev = None
-        while True:
+
+
+    def connectDev(self):
             try:
                 self.__dev = Android('emulator-5554')
+
             except:
-                pass
+                print('dev not found')
+                return False
             if self.__dev != None:
                 print('dev connect')
-                break
-            self.sleep()
+                return True
 
     # def getdev(self):
     #     return self.__dev

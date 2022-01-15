@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'arknightsUI.ui'
+# Form implementation generated from reading ui file '.\arknightsUI.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -14,27 +14,44 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
+        MainWindow.setEnabled(True)
         MainWindow.resize(400, 300)
+        MainWindow.setStyleSheet("")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         font = QtGui.QFont()
         font.setFamily("宋体")
         self.centralwidget.setFont(font)
+        self.centralwidget.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.centralwidget.setObjectName("centralwidget")
-        self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(10, 10, 71, 16))
+        self.frame = QtWidgets.QFrame(self.centralwidget)
+        self.frame.setGeometry(QtCore.QRect(0, 0, 400, 300))
+        self.frame.setStyleSheet("QFrame{background-image: url(:/新前缀/ui_img/background.png);}\n"
+"\n"
+"QLabel{color:#fff;background:transparent;font-size:14px;font-weight:bold}\n"
+"\n"
+"QPushButton{border:rgba(255,255,255,0.8);background:rgba(255,255,255,0.7);height:30px;border-radius:4px}\n"
+"QPushButton:pressed{background-color:rgba(255,255,255,0.5);}")
+        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame.setObjectName("frame")
+        self.label = QtWidgets.QLabel(self.frame)
+        self.label.setGeometry(QtCore.QRect(10, 5, 80, 20))
         self.label.setObjectName("label")
-        self.jingyanEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.jingyanEdit.setGeometry(QtCore.QRect(30, 30, 21, 20))
-        self.jingyanEdit.setObjectName("jingyanEdit")
-        self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(50, 30, 16, 16))
-        self.label_2.setObjectName("label_2")
-        self.jingyanBT = QtWidgets.QPushButton(self.centralwidget)
-        self.jingyanBT.setGeometry(QtCore.QRect(10, 60, 75, 23))
-        self.jingyanBT.setObjectName("jingyanBT")
-        self.jingyanBT_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.jingyanBT_2.setGeometry(QtCore.QRect(120, 250, 131, 23))
-        self.jingyanBT_2.setObjectName("jingyanBT_2")
+        self.layoutWidget = QtWidgets.QWidget(self.frame)
+        self.layoutWidget.setGeometry(QtCore.QRect(80, 244, 239, 32))
+        self.layoutWidget.setObjectName("layoutWidget")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.layoutWidget)
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.devConnectBt = QtWidgets.QPushButton(self.layoutWidget)
+        self.devConnectBt.setObjectName("devConnectBt")
+        self.horizontalLayout.addWidget(self.devConnectBt)
+        self.startGameBt = QtWidgets.QPushButton(self.layoutWidget)
+        self.startGameBt.setObjectName("startGameBt")
+        self.horizontalLayout.addWidget(self.startGameBt)
+        self.expMapBt = QtWidgets.QPushButton(self.layoutWidget)
+        self.expMapBt.setObjectName("expMapBt")
+        self.horizontalLayout.addWidget(self.expMapBt)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -43,8 +60,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "自动经验本"))
-        self.jingyanEdit.setText(_translate("MainWindow", "0"))
-        self.label_2.setText(_translate("MainWindow", "次"))
-        self.jingyanBT.setText(_translate("MainWindow", "启动"))
-        self.jingyanBT_2.setText(_translate("MainWindow", "启动模拟器并自动加载"))
+        self.label.setText(_translate("MainWindow", "设备未连接"))
+        self.devConnectBt.setText(_translate("MainWindow", "连接设备"))
+        self.startGameBt.setText(_translate("MainWindow", "启动游戏"))
+        self.expMapBt.setText(_translate("MainWindow", "开始刷本"))
+import ui_rc

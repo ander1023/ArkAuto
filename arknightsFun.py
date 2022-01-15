@@ -1,8 +1,15 @@
 #!/usr/bin/env python
 # coding: utf-8
 import arknightsUtils as utils
-class ADBTOOL:
-    def loading(self):
+import os
+import threading
+class Fun:
+    def connectDev(self):
+        if utils.ut.connectDev():
+            return True
+        else:
+            return False
+    def startGame(self):
         utils.ut.startapp('com.hypergryph.arknights')
         while True:
             if utils.ut.img_match('加载'):
@@ -11,7 +18,7 @@ class ADBTOOL:
             utils.ut.sleep()
         while True:
             if utils.ut.img_match('开始唤醒'):
-                utils.ut.sleep()
+                utils.ut.sleep(5)
                 utils.ut.touchName('开始唤醒')
                 break
             utils.ut.sleep()
@@ -25,7 +32,7 @@ class ADBTOOL:
                 utils.ut.touchName('终端')
                 utils.ut.sleep()
                 break
-            elif self.returnHome():
+            elif self.__returnHome__():
                 pass
             else:
                 print('无法找到主页')
@@ -45,7 +52,7 @@ class ADBTOOL:
                 utils.ut.sleep()
                 utils.ut.touchName('理智界面x')
                 utils.ut.sleep()
-                if self.returnHome():
+                if self.__returnHome__():
                     print('理智已用完')
                     return
                 else :
@@ -61,7 +68,9 @@ class ADBTOOL:
             utils.ut.sleep(10)
             utils.ut.touchName('战斗完成')
             utils.ut.sleep()
-    def returnHome(self):
+
+
+    def __returnHome__(self):
         utils.ut.sleep()
         if utils.ut.img_match('bar首页'):
             utils.ut.touchName('bar首页')
@@ -75,9 +84,9 @@ class ADBTOOL:
         else:
             return False
 
-
+fun = Fun()
 if __name__ == "__main__":
-    A = ADBTOOL()
+    A = Fun()
     A.loading()
     A.normal()
 
