@@ -7,7 +7,7 @@ import time
 import arknightsData as database
 import random
 
-
+#todo 修改为本地日志
 class Utils:
     def __init__(self):
         self.__dev = None
@@ -47,7 +47,7 @@ class Utils:
             pos = tempalte.match_in(local_screen)
 
             if pos:
-                print('img_match ' + '--' + name + '--  OK')
+                print('img_match ' + '--' + name + '--  Success')
                 time.sleep(3)
                 return True
             else:

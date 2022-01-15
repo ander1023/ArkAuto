@@ -70,11 +70,11 @@ class MainUI(QMainWindow):
     def ConnectDevThread_callback(self, inf):
         global isConnect
         if inf:
-            self.setLogLable('设备已连接')
             isConnect = True
+            self.setLogLable('设备已连接')
         else:
-            self.setLogLable('设备未连接')
             isConnect = False
+            self.setLogLable('设备未连接')
 
     def HitokotoThread_callback(self, inf):
         self.ui.hitokotoLable.setText(inf)
