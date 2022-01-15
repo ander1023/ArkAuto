@@ -183,6 +183,10 @@ class launchGameThread(QThread):
                 break
             ut.sleep()
         print('loading DONE')
+# class autoFriendThread(QThread):
+#     def __init__(self):
+#         super(autoFriendThread, self).__init__()
+#     def run(self) :
 
 
 class HitokotoApiThread(QThread):

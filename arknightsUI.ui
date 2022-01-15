@@ -54,13 +54,16 @@ QPushButton:pressed{background-color:rgba(255,255,255,0.5);}</string>
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>80</x>
+       <x>0</x>
        <y>244</y>
-       <width>239</width>
+       <width>391</width>
        <height>32</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QWidget" name="widget" native="true"/>
+      </item>
       <item>
        <widget class="QPushButton" name="devConnectBt">
         <property name="text">
@@ -82,22 +85,32 @@ QPushButton:pressed{background-color:rgba(255,255,255,0.5);}</string>
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QPushButton" name="autoFriendsBt">
+        <property name="text">
+         <string>好友访问</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QWidget" name="widget_2" native="true"/>
+      </item>
      </layout>
     </widget>
     <widget class="QLabel" name="hitokotoLable">
      <property name="geometry">
       <rect>
-       <x>4</x>
-       <y>4</y>
+       <x>0</x>
+       <y>100</y>
        <width>381</width>
        <height>81</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">*{background:rgba(255,255,255,0.7);color:rgb(0,0,0);border-radius:10px}</string>
+      <string notr="true">&lt;--*{background:rgba(255,255,255,0.7);color:rgb(0,0,0);border-radius:10px}!--&gt;</string>
      </property>
      <property name="text">
-      <string>一言</string>
+      <string/>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
