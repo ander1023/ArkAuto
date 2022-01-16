@@ -37,7 +37,7 @@ class Utils:
         y = database.CM[name][1]
         self.__dev.touch((x, y), 0.01)
         print('touchList ' + '--' + name + '--')
-        time.sleep(3)
+        self.sleep(3)
 
     def img_match(self, name):
         try:
@@ -45,10 +45,8 @@ class Utils:
             local_screen = crop_image(self.__dev.snapshot(), (img[0], img[1], img[2], img[3]))
             tempalte = Template(database.IM[name][0])
             pos = tempalte.match_in(local_screen)
-
             if pos:
                 print('img_match ' + '--' + name + '--  Success')
-                time.sleep(3)
                 return True
             else:
                 print('img_match ' + '--' + name + '--  Fail')
@@ -56,4 +54,6 @@ class Utils:
         except:
             print('img_match ' + '--' + name + '--  Fail')
             return False
+        finally:
+            self.sleep(3)
 ut = Utils()
