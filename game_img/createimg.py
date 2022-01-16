@@ -29,3 +29,5 @@ exists(Template(r"tpl1642224008220.png", record_pos=(-0.22, 0.165), resolution=(
 exists(Template(r"tpl1642224048378.png", record_pos=(0.43, 0.207), resolution=(1280, 720)))
 exists(Template(r"tpl1642224099712.png", record_pos=(0.423, 0.212), resolution=(1280, 720)))
 
+wait(Template(r"tpl1642315884557.png", record_pos=(0.426, 0.212), resolution=(1280, 720)))
+wait(Template(r"tpl1642316165139.png", record_pos=(0.425, 0.21), resolution=(1280, 720)))

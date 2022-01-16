@@ -76,10 +76,10 @@ QPushButton:pressed{background-color:rgba(255,255,255,0.5);}</string>
     <widget class="QLabel" name="logLable">
      <property name="geometry">
       <rect>
-       <x>11</x>
-       <y>273</y>
+       <x>10</x>
+       <y>50</y>
        <width>371</width>
-       <height>20</height>
+       <height>41</height>
       </rect>
      </property>
      <property name="font">
@@ -90,7 +90,7 @@ QPushButton:pressed{background-color:rgba(255,255,255,0.5);}</string>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">*{color:black;border-radius:10px;font-size:10px}</string>
+      <string notr="true">*{color:black;border-radius:10px;font-size:16px}</string>
      </property>
      <property name="text">
       <string/>
@@ -116,11 +116,11 @@ QPushButton:pressed{background-color:rgba(255,255,255,0.5);}</string>
         </item>
         <item>
          <widget class="QWidget" name="widget_3" native="true">
-          <widget class="QPushButton" name="pushButton_2">
+          <widget class="QPushButton" name="autoCountBt">
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>30</y>
+             <y>26</y>
              <width>121</width>
              <height>30</height>
             </rect>
@@ -133,7 +133,7 @@ QPushButton:pressed{background-color:rgba(255,255,255,0.5);}</string>
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>10</y>
+             <y>6</y>
              <width>101</width>
              <height>16</height>
             </rect>
@@ -146,7 +146,7 @@ QPushButton:pressed{background-color:rgba(255,255,255,0.5);}</string>
            <property name="geometry">
             <rect>
              <x>98</x>
-             <y>7</y>
+             <y>3</y>
              <width>21</width>
              <height>20</height>
             </rect>
@@ -179,7 +179,7 @@ QPushButton:pressed{background-color:rgba(255,255,255,0.5);}</string>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="stopAllBt">
           <property name="text">
            <string>停止</string>
           </property>

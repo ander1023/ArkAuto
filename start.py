@@ -17,6 +17,7 @@ from threading import Thread
 # pyuic5 -o test.py test.ui
 # pyrcct -o test.py test.qrc
 isConnect = False
+autoCount = 0
 class MainUI(QMainWindow):
     def __init__(self):
         super(MainUI, self).__init__()
@@ -35,6 +36,10 @@ class MainUI(QMainWindow):
         self.ui.expMapBt.clicked.connect(self.btEven)
         self.ui.devConnectBt.clicked.connect(self.btEven)
         self.ui.startGameBt.clicked.connect(self.btEven)
+        self.ui.autoFriendsBt.clicked.connect(self.btEven)
+        self.ui.autoCountBt.clicked.connect(self.btEven)
+        self.ui.stopAllBt.clicked.connect(self.btEven)
+
 #todo 引入线程池
     def initThread(self):
         self.connectDevThread = connectDevThread()
@@ -56,7 +61,7 @@ class MainUI(QMainWindow):
         self.haT.sinOut.connect(self.HitokotoThread_callback)
 
     def btEven(self):
-        global isConnect
+        global isConnect,autoCount
         if self.sender().text() == '连接设备':
             self.connectDevThread.start()
             self.setLogLable('正在连接')
@@ -80,14 +85,12 @@ class MainUI(QMainWindow):
                 self.setLogLable('正在停止所有任务')
             if self.sender().text() == '自动刷本':
                 try:
-                    autoCound = int(self.ui.lineEdit.text())
-                    if autoCound < 0:
+                    autoCount = int(self.ui.lineEdit.text())
+                    if autoCount<0:
                         raise
                 except:
                     self.setLogLable('请填写正确阿拉伯数字')
-                sinOut = pyqtSignal(int)
-                sinOut.connect(autoCountThread.run)
-                sinOut.emit(autoCound)
+
                 self.autoCountThread.start()
 
 
