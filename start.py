@@ -122,5 +122,6 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     ui = MainUI()
     ui.setFixedSize(ui.width(), ui.height())
+    ui.setWindowFlags(Qt.WindowStaysOnTopHint)
     ui.show()
     sys.exit(app.exec_())

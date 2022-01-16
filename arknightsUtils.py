@@ -55,5 +55,5 @@ class Utils:
             print('img_match ' + '--' + name + '--  Fail')
             return False
         finally:
-            self.sleep(1)
+            self.sleep()
 ut = Utils()

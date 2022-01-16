@@ -36,20 +36,22 @@ class exp_5Thread(QThread):
     def run(self):
         while True:
             if ut.img_match('主页设置按钮'):
-                ut.touchName('终端')
+                self.work()
                 break
-            elif self.returnHome():
-                pass
+            elif returnHome():
+                self.work()
             else:
                 print('无法找到主页')
-
+                return
+    def work(self):
+        ut.touchName('终端')
         ut.touchName('日常子界面')
         ut.touchName('战术演习')
         ut.touchName('ls5')
         # for i in range():
         while True:
             ut.touchName('战斗准备')
-            if haveRealize():
+            if not haveRealize():
                 pass
             else:
                 return
