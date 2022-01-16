@@ -67,7 +67,7 @@ class MainUI(QMainWindow):
             self.setLogLable('正在连接')
             self.connectDevThread.sinOut.connect(self.ConnectDevThread_callback)
 
-        if not isConnect:
+        elif not isConnect:
             self.setLogLable('请连接后重试')
             return
         else:
