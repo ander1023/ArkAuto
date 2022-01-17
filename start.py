@@ -48,7 +48,7 @@ class MainUI(QMainWindow):
         self.HitokotoApiThread = HitokotoApiThread()
         self.autoFriendThread = autoFriendThread()
         self.autoCountThread = autoCountThread()
-
+#todo 连接槽方法 输出日志
     def closeAllThare(self):
         self.connectDevThread.quit()
         self.launchGameThread.quit()
@@ -125,3 +125,6 @@ if __name__ == "__main__":
     ui.setWindowFlags(Qt.WindowStaysOnTopHint)
     ui.show()
     sys.exit(app.exec_())
+    #todo 添加置顶按钮
+    #todo 调整窗口出现位置
+    #todo 添加是否使用理智按钮

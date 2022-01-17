@@ -18,15 +18,13 @@ def returnHome():
         return True
     else:
         return False
-def haveRealize():
+def outRealize():
         if ut.img_match('理智界面'):
             ut.touchName('理智界面x')
-            if returnHome():
-                print('理智已用完')
-                return False
-            else:
-                print('理智已用完')
-                return False
+            returnHome()
+            print('理智已用完')
+            return True
+        return False
 
 class exp_5Thread(QThread):
     #经验本5
@@ -51,11 +49,9 @@ class exp_5Thread(QThread):
         # for i in range():
         while True:
             ut.touchName('战斗准备')
-            if not haveRealize():
-                pass
-            else:
+            if outRealize():
                 return
-            ut.touchName('战斗准备')
+            ut.touchName('战斗准备1')
             while True:
                 ut.sleep()
                 print('等待战斗完成')
@@ -63,6 +59,7 @@ class exp_5Thread(QThread):
                     break
             ut.sleep(10)
             ut.touchName('战斗完成')
+            ut.sleep()
 
 class connectDevThread(QThread):
     #连接设备
@@ -115,7 +112,7 @@ class autoFriendThread(QThread):
         ut.touchName('访问第一位好友')
         while True:
             if ut.img_match('下一位暗'):
-                #todo判断出错
+                #todo 判断出错暂未解决
                 returnHome()
                 print('好友访问完成')
             else:
@@ -131,9 +128,7 @@ class autoCountThread(QThread):
         if ac == 0:
             while True:
                 ut.touchName('战斗准备')
-                if haveRealize():
-                    pass
-                else:
+                if outRealize():
                     return
                 ut.touchName('战斗准备')
                 while True:
@@ -143,11 +138,10 @@ class autoCountThread(QThread):
                         break
                 ut.sleep(10)
                 ut.touchName('战斗完成')
-        for i in range(0,ac):
+                ut.sleep()
+        for i in range(1,ac+1):
             ut.touchName('战斗准备')
-            if haveRealize():
-                pass
-            else:
+            if outRealize():
                 return
             ut.touchName('战斗准备')
             while True:
