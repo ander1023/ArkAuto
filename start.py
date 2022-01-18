@@ -48,6 +48,8 @@ class MainUI(QMainWindow):
         self.HitokotoApiThread = HitokotoApiThread()
         self.autoFriendThread = autoFriendThread()
         self.autoCountThread = autoCountThread()
+
+        self.connectDevThread.sinOut.connect(self.ConnectDevThread_callback)
 #todo 连接槽方法 输出日志
     def closeAllThare(self):
         self.connectDevThread.quit()
@@ -65,7 +67,7 @@ class MainUI(QMainWindow):
         if self.sender().text() == '连接设备':
             self.connectDevThread.start()
             self.setLogLable('正在连接')
-            self.connectDevThread.sinOut.connect(self.ConnectDevThread_callback)
+
 
         elif not isConnect:
             self.setLogLable('请连接后重试')
@@ -85,8 +87,8 @@ class MainUI(QMainWindow):
                 self.setLogLable('正在停止所有任务')
             if self.sender().text() == '自动刷本':
                 try:
-                    autoCount = int(self.ui.lineEdit.text())
-                    if autoCount<0:
+                    self.autoCount = int(self.ui.lineEdit.text())
+                    if self.autoCount<0:
                         raise
                 except:
                     self.setLogLable('请填写正确阿拉伯数字')

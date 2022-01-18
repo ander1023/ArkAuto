@@ -145,10 +145,12 @@ class autoCountThread(QThread):
         super(autoCountThread, self).__init__()
     def run(self):
         ac = start.autoCount
+        #todo 获取不到数据
         if ac == 0:
            funtools.whileBattleRound()
         for i in range(1,ac+1):
             funtools.whileBattleRound()
+        funtools.returnHome()
 
 
 
