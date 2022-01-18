@@ -92,7 +92,7 @@ class MainUI(QMainWindow):
         if text == '连接成功':
             self.isConnect = True
         if not self.isConnect:
-            self.ui.logLable.setText('status:未连接| 运行失败')
+            self.ui.logLable.setText('status:未连接| 运行失败'+'\n'+time.strftime("%H:%M:%S", time.localtime()))
         else:
             self.ui.logLable.setText('status:已连接| ' + text+'\n'+time.strftime("%H:%M:%S", time.localtime()))
 
