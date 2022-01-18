@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# coding: utf-8
 IM = {
     #load
     '加载': ['game_img/tpl1642000237225.png', [1200, 10, 1260, 85]],

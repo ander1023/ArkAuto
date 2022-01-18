@@ -1,4 +1,5 @@
-
+#!/usr/bin/env python
+# coding: utf-8
 import time
 
 from PyQt5.QtCore import QThread, pyqtSignal
@@ -49,7 +50,7 @@ class MainThread(QThread):
 #----------------------------fun------------------------
     def exp_5Thread(self):
         self.setLogLable('经验五任务启动中..')
-        while self.flag and True:
+        while self.flag:
             if ut.img_match('主页设置按钮'):
                 self.exp_5Thread_work()
                 break
@@ -65,7 +66,7 @@ class MainThread(QThread):
         ut.touchName('战术演习')
         ut.touchName('ls5')
         # for i in range():
-        self.whileBattleRound()
+        self.onceBattleRound()
         self.setLogLable('SUCCESS')
 
     def connectDevThread(self):
@@ -77,13 +78,14 @@ class MainThread(QThread):
     def launchGameThread(self):
         self.setLogLable('启动游戏中..')
         ut.startapp('com.hypergryph.arknights')
-        while self.flag and True:
+        self.setLogLable('加载中')
+        while self.flag:
             if ut.img_match('加载'):
                 ut.touchName('加载')
                 break
             ut.sleep()
-        self.setLogLable('完成加载')
-        while self.flag and True:
+        self.setLogLable('加载完成')
+        while self.flag:
             if ut.img_match('开始唤醒'):
                 ut.touchName('开始唤醒')
                 break
@@ -103,40 +105,48 @@ class MainThread(QThread):
 
     def autoFriendThread_work(self):
         ut.touchName('好友')
+        if self.flag:
+            return
         ut.touchName('好友列表')
+        if self.flag:
+            return
         ut.touchName('访问第一位好友')
-        while self.flag and True:
+        if self.flag:
+            return
+        while self.flag:
             ut.sleep(1)
-            if ut.img_match('下一位暗'):
+            if ut.img_match('下一位暗') and self.flag:
                 # todo 判断出错暂未解决
                 self.returnHome()
                 self.setLogLable('好友访问完成')
                 return
             else:
+                if self.flag:
+                    return
                 self.setLogLable('访问下一位')
                 ut.touchName('访问下一位')
 
     def autoCountThread(self):
-        # todo 获取不到数据
         ac = self.data
         if ac < 0:
             return
         if ac == 0:
-            self.whileBattleRound()
+            self.onceBattleRound()
             return
         for i in range(1, ac + 1) :
+            print(i)
             if self.flag == False:
                 return
             self.setLogLable('次数：'+ str(i) + '次 还剩：'+ str(ac+1-i) + '次')
-            self.whileBattleRound()
             ut.sleep()
+            self.onceBattleRound()
         self.returnHome()
         self.setLogLable('SUCCESS')
 
 
     # -------------------------tool--------------------
     def enterBattle(self):
-        self.setLogLable('战斗准备')
+        self.setLogLable('开始行动')
         ut.touchName('战斗准备')
         if self.outRealize():
             return False
@@ -144,25 +154,26 @@ class MainThread(QThread):
         ut.touchName('战斗准备1')
         return True
 
-    def whileBattleComplete(self):
-        while self.flag and True:
-            self.setLogLable('判断是否结束中')
+    def whileWaitBattleComplete(self):
+        while self.flag:
             if ut.img_match('作战简报'):
                 ut.touchName('剿灭完成')
                 ut.sleep(5)
+                self.setLogLable('剿灭完成')
             if ut.img_match('战斗完成'):
                 ut.sleep(10)
+                self.setLogLable('战斗完成')
                 ut.touchName('战斗完成')
                 return True
             ut.sleep()
 
-    def whileBattleRound(self):
+    def onceBattleRound(self):
         self.setLogLable('开始副本循环')
-        while self.flag and True:
+        while self.flag:
             if self.enterBattle():
-                self.whileBattleComplete()
-            else:
-                break
+                self.setLogLable('等待战斗完成')
+                self.whileWaitBattleComplete()
+                return
             ut.sleep()
 
     def returnHome(self):

@@ -1,5 +1,5 @@
-import time
-
+#!/usr/bin/env python
+# coding: utf-8
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QThread, pyqtSignal, Qt
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QMessageBox

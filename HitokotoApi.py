@@ -1,4 +1,8 @@
+#!/usr/bin/env python
+# coding: utf-8
 import requests
+
+
 def getHitokotoText():
     url = 'https://v1.hitokoto.cn/?c=a&c=b&c=c&encode=text'
     #接口https://hitokoto.cn/

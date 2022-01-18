@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# coding: utf-8
 import os
 os.system('pyuic5 -o arknightsUI.py arknightsUI.ui')
 print('已转换ui文件')
