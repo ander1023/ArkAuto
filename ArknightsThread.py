@@ -1,8 +1,8 @@
+import sys
 import time
 
 from  PyQt5.QtCore   import QThread,pyqtSignal
 
-import start
 from HitokotoApi import getHitokotoText
 from arknightsBaseUtils import  ut
 # -----------------------------------Thread-----------------------------------
@@ -65,10 +65,14 @@ class MainThread(QThread):
     signal = pyqtSignal(str)
     signal_str = None
 
+
     def __init__(self):
         super(MainThread, self).__init__()
+        self.flag = None
         self.battleCount = 0
     def run(self):
+        time.slep(1)#等待判断
+        flag = True
         if self.signal_str == None:
             return
         if self.signal_str == 'exp_5Thread':
@@ -84,7 +88,12 @@ class MainThread(QThread):
         if self.signal_str == 'autoCountThread':
             self.autoCountThread()
     def getSignal(self,text):
+        if text =='close':
+            self.flag = True
         self.signal_str = text
+
+
+
 
     def exp_5Thread(self):
         while True:
@@ -107,7 +116,7 @@ class MainThread(QThread):
 
     def connectDevThread(self):
         if ut.connectDev():
-            pass
+            self.signal.emit('连接成功')
     def launchGameThread(self):
         ut.startapp('com.hypergryph.arknights')
         while True:
@@ -147,8 +156,8 @@ class MainThread(QThread):
             else:
                 ut.touchName('访问下一位')
     def autoCountThread(self):
-        ac = start.autoCount
         #todo 获取不到数据
+        ac = 0
         if ac == 0:
            funtools.whileBattleRound()
         for i in range(1,ac+1):

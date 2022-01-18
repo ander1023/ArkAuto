@@ -6,19 +6,14 @@ from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QMessageBox
 
 from ArknightsThread import *
 from arknightsUI import Ui_MainWindow
-from arknightsBaseUtils import ut
 
 from HitokotoApi import getHitokotoText
 
 import sys
-from threading import Thread
 
-
-# pyuic5 -o test.py test.ui
-# pyrcct -o test.py test.qrc
 
 class MainUI(QMainWindow):
-    signal = pyqtSignal(str)
+    MThread_Signal = pyqtSignal(str)
     def __init__(self):
         super(MainUI, self).__init__()
         self.MThread = MainThread()
@@ -45,15 +40,15 @@ class MainUI(QMainWindow):
 
 
     def initThread(self):
-        self.signal.connect(self.MThread.getSignal)
+        self.MThread_Signal.connect(self.MThread.getSignal)
         self.MThread.signal.connect(self.setLogLable)
         # self.signal.emit()
 
 #todo 连接槽方法 输出日志
     def closeMainThread(self):
         if self.MThread.isRunning():
-            self.MThread.quit()
-
+            print('MThreadisrun')
+            self.MThread_Signal.emit('close')
     def initHitokoto(self):
         self.haT.start()
         self.haT.sinOut.connect(self.HitokotoThread_callback)
@@ -62,24 +57,22 @@ class MainUI(QMainWindow):
         if self.sender().text() == '连接设备':
             self.setLogLable('正在连接')
             self.MThread.start()
-            self.signal.emit('connectDevThread')
+            self.MThread_Signal.emit('connectDevThread')
         elif not self.isConnect:
             self.setLogLable('请连接后重试')
             return
         else:
+            self.MThread.start()
+            self.MThreadFlag = True
             if self.sender().text() == '启动游戏':
                 self.setLogLable('正在进入游戏')
-                self.MThread.start()
-                self.signal.emit('launchGameThread')
+                self.MThread_Signal.emit('launchGameThread')
             if self.sender().text() == '开始刷本':
-                self.setLogLable('正在自动exp—5')
-                self.exp_5Thread.start()
+                self.MThread_Signal.emit('exp_5Thread')
             if self.sender().text() == '好友访问':
-                self.setLogLable('正在好友访问')
-                self.autoFriendThread.start()
+                self.MThread_Signal.emit('autoFriendThread')
             if self.sender().text() == '停止':
-                self.closeAllThare()
-                self.setLogLable('正在停止所有任务')
+                self.closeMainThread()
             if self.sender().text() == '自动刷本':
                 try:
                     self.autoCount = int(self.ui.lineEdit.text())
@@ -88,22 +81,21 @@ class MainUI(QMainWindow):
                 except:
                     self.setLogLable('请填写正确阿拉伯数字')
 
-                self.autoCountThread.start()
-
-    def HitokotoThread_callback(self, inf):
-        self.ui.hitokotoLable.setText(inf)
+                self.MThread_Signal.emit('autoCountThread')
 
     #------------------------------------tools-----------------------------------
-    def setLogLable(self, str):
+    def setLogLable(self, text):
+        if text == '连接成功':
+            self.isConnect = True
+            return
         if not self.isConnect:
-            self.ui.logLable.setText('status:未连接|' + str)
+            self.ui.logLable.setText('status:未连接| 运行失败')
         else:
-            self.ui.logLable.setText('status:已连接|' + str)
-
-
+            self.ui.logLable.setText('status:已连接| ' + text)
 
 
 if __name__ == "__main__":
+
     app = QApplication(sys.argv)
     ui = MainUI()
     ui.setFixedSize(ui.width(), ui.height())

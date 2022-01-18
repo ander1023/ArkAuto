@@ -6,7 +6,6 @@ from airtest.core.api import *
 import time
 import arknightsData as database
 import random
-
 #todo 修改为本地日志
 class Utils:
     def __init__(self):
@@ -30,6 +29,7 @@ class Utils:
         self.__dev.start_app(name, activity=None)
 
     def sleep(self, second=3):
+        # if ui.
         time.sleep(second + random.random()*2)
 
     def touchName(self, name):
