@@ -16,11 +16,13 @@ from threading import Thread
 
 # pyuic5 -o test.py test.ui
 # pyrcct -o test.py test.qrc
-isConnect = False
-autoCount = 0
+
 class MainUI(QMainWindow):
+    signal = pyqtSignal(str)
     def __init__(self):
         super(MainUI, self).__init__()
+        self.MThread = MainThread()
+        self.isConnect = False
         self.initUI()
         self.initThread()
         #self.initHitokoto()
@@ -33,6 +35,7 @@ class MainUI(QMainWindow):
         self.ui.setupUi(self)
         self.setWindowTitle('Arknights by大山猛')
         self.setWindowIcon(QIcon('ui_img/icon.jpg'))
+
         self.ui.expMapBt.clicked.connect(self.btEven)
         self.ui.devConnectBt.clicked.connect(self.btEven)
         self.ui.startGameBt.clicked.connect(self.btEven)
@@ -40,42 +43,34 @@ class MainUI(QMainWindow):
         self.ui.autoCountBt.clicked.connect(self.btEven)
         self.ui.stopAllBt.clicked.connect(self.btEven)
 
-#todo 引入线程池
-    def initThread(self):
-        self.connectDevThread = connectDevThread()
-        self.launchGameThread = launchGameThread()
-        self.exp_5Thread = exp_5Thread()
-        self.HitokotoApiThread = HitokotoApiThread()
-        self.autoFriendThread = autoFriendThread()
-        self.autoCountThread = autoCountThread()
 
-        self.connectDevThread.sinOut.connect(self.ConnectDevThread_callback)
+    def initThread(self):
+        self.signal.connect(self.MThread.getSignal)
+        self.MThread.signal.connect(self.setLogLable)
+        # self.signal.emit()
+
 #todo 连接槽方法 输出日志
-    def closeAllThare(self):
-        self.connectDevThread.quit()
-        self.launchGameThread.quit()
-        self.exp_5Thread.quit()
-        self.HitokotoApiThread.quit()
-        self.autoFriendThread.quit()
-        self.autoCountThread.quit()
+    def closeMainThread(self):
+        if self.MThread.isRunning():
+            self.MThread.quit()
+
     def initHitokoto(self):
         self.haT.start()
         self.haT.sinOut.connect(self.HitokotoThread_callback)
 
     def btEven(self):
-        global isConnect,autoCount
         if self.sender().text() == '连接设备':
-            self.connectDevThread.start()
             self.setLogLable('正在连接')
-
-
-        elif not isConnect:
+            self.MThread.start()
+            self.signal.emit('connectDevThread')
+        elif not self.isConnect:
             self.setLogLable('请连接后重试')
             return
         else:
             if self.sender().text() == '启动游戏':
                 self.setLogLable('正在进入游戏')
-                self.launchGameThread.start()
+                self.MThread.start()
+                self.signal.emit('launchGameThread')
             if self.sender().text() == '开始刷本':
                 self.setLogLable('正在自动exp—5')
                 self.exp_5Thread.start()
@@ -95,24 +90,12 @@ class MainUI(QMainWindow):
 
                 self.autoCountThread.start()
 
-
-
-    def ConnectDevThread_callback(self, inf):
-        global isConnect
-        if inf:
-            isConnect = True
-            self.setLogLable('设备已连接')
-        else:
-            isConnect = False
-            self.setLogLable('设备未连接')
-
     def HitokotoThread_callback(self, inf):
         self.ui.hitokotoLable.setText(inf)
 
     #------------------------------------tools-----------------------------------
     def setLogLable(self, str):
-        global isConnect
-        if not isConnect:
+        if not self.isConnect:
             self.ui.logLable.setText('status:未连接|' + str)
         else:
             self.ui.logLable.setText('status:已连接|' + str)

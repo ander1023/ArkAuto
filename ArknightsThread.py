@@ -1,3 +1,5 @@
+import time
+
 from  PyQt5.QtCore   import QThread,pyqtSignal
 
 import start
@@ -56,12 +58,35 @@ class Funtools:
             return False
     def isCheckAuto(self):
         pass
-class exp_5Thread(QThread):
-    #经验本5
-    def __init__(self):
-        super(exp_5Thread, self).__init__()
 
+funtools = Funtools()
+
+class MainThread(QThread):
+    signal = pyqtSignal(str)
+    signal_str = None
+
+    def __init__(self):
+        super(MainThread, self).__init__()
+        self.battleCount = 0
     def run(self):
+        if self.signal_str == None:
+            return
+        if self.signal_str == 'exp_5Thread':
+            self.exp_5Thread()
+        if self.signal_str == 'connectDevThread':
+
+            self.connectDevThread()
+
+        if self.signal_str == 'launchGameThread':
+            self.launchGameThread()
+        if self.signal_str == 'autoFriendThread':
+            self.autoFriendThread()
+        if self.signal_str == 'autoCountThread':
+            self.autoCountThread()
+    def getSignal(self,text):
+        self.signal_str = text
+
+    def exp_5Thread(self):
         while True:
             if ut.img_match('主页设置按钮'):
                 self.work()
@@ -71,34 +96,19 @@ class exp_5Thread(QThread):
             else:
                 print('无法找到主页')
                 return
-    def work(self):
+    def exp_5Thread_work(self):
         ut.touchName('终端')
         ut.touchName('日常子界面')
         ut.touchName('战术演习')
         ut.touchName('ls5')
         # for i in range():
         funtools.whileBattleRound()
-funtools = Funtools()
-class connectDevThread(QThread):
-    #连接设备
-    sinOut = pyqtSignal(bool)
 
-    def __init__(self):
-        super(connectDevThread, self).__init__()
 
-    def run(self):
+    def connectDevThread(self):
         if ut.connectDev():
-            self.sinOut.emit(True)
-        else:
-            self.sinOut.emit(False)
-
-
-class launchGameThread(QThread):
-    #加载游戏
-    def __init__(self):
-        super(launchGameThread, self).__init__()
-
-    def run(self):
+            pass
+    def launchGameThread(self):
         ut.startapp('com.hypergryph.arknights')
         while True:
             if ut.img_match('加载'):
@@ -112,19 +122,19 @@ class launchGameThread(QThread):
             ut.sleep()
         print('loading DONE')
 
-class autoFriendThread(QThread):
-    #好友拜访
-    def __init__(self):
-        super(autoFriendThread, self).__init__()
-    def run(self) :
+
+
+
+
+    def autoFriendThread(self):
         if ut.img_match('主页设置按钮'):
-            self.work()
-        if not funtools.returnHome():
-            print('无法找到主页')
-            return
-        elif ut.img_match('主页设置按钮'):
-            self.work()
-    def work(self):
+            self.autoFriendThread_work()
+            if not funtools.returnHome():
+                print('无法找到主页')
+                return
+            elif ut.img_match('主页设置按钮'):
+                self.autoFriendThread_work()
+    def autoFriendThread_work(self):
         ut.touchName('好友')
         ut.touchName('好友列表')
         ut.touchName('访问第一位好友')
@@ -136,14 +146,7 @@ class autoFriendThread(QThread):
                 print('好友访问完成')
             else:
                 ut.touchName('访问下一位')
-
-
-
-class autoCountThread(QThread):
-    #需要放到战斗准备界面开启代理
-    def __init__(self):
-        super(autoCountThread, self).__init__()
-    def run(self):
+    def autoCountThread(self):
         ac = start.autoCount
         #todo 获取不到数据
         if ac == 0:
@@ -153,11 +156,8 @@ class autoCountThread(QThread):
         funtools.returnHome()
 
 
-
-
-
 class HitokotoApiThread(QThread):
-    #一言 todo内存不足
+    #一言 todo 内存不足
     sinOut = pyqtSignal(str)
 
     def __init__(self):
