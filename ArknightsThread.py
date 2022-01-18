@@ -2,30 +2,60 @@ from  PyQt5.QtCore   import QThread,pyqtSignal
 
 import start
 from HitokotoApi import getHitokotoText
-from arknightsUtils import  ut
+from arknightsBaseUtils import  ut
 # -----------------------------------Thread-----------------------------------
 
-def returnHome():
-    #返回主页面
-    if ut.img_match('bar首页'):
-        ut.touchName('bar首页')
-        ut.sleep()
-        return True
-    elif ut.img_match('barhome'):
-        ut.touchName('barhome')
-        ut.touchName('bar首页')
-        ut.sleep()
-        return True
-    else:
-        return False
-def outRealize():
-        if ut.img_match('理智界面'):
-            ut.touchName('理智界面x')
-            returnHome()
-            print('理智已用完')
-            return True
-        return False
 
+class Funtools:
+    def enterBattle(self):
+        ut.touchName('战斗准备')
+        if self.outRealize():
+            return  False
+            #todo 如果outRealize方法修改 则判断没有药时为false
+        ut.touchName('战斗准备1')
+        return True
+    def whileBattleComplete(self):
+        while True:
+
+            print('判断中')
+            if ut.img_match('作战简报'):
+                ut.touchName('剿灭完成')
+                ut.sleep(5)
+            if ut.img_match('战斗完成'):
+                ut.sleep(10)
+                ut.touchName('战斗完成')
+                return True
+            ut.sleep()
+    def whileBattleRound(self):
+        while True:
+            if self.enterBattle():
+                self.whileBattleComplete()
+            else:
+                break
+            ut.sleep()
+    def returnHome(self):
+        #返回主页面
+        if ut.img_match('bar首页'):
+            ut.touchName('bar首页')
+            ut.sleep()
+            return True
+        elif ut.img_match('barhome'):
+            ut.touchName('barhome')
+            ut.touchName('bar首页')
+            ut.sleep()
+            return True
+        else:
+            return False
+    def outRealize(self):
+        #todo 修改参数令其使用有两种情况
+            if ut.img_match('理智界面'):
+                ut.touchName('理智界面x')
+                funtools.returnHome()
+                print('理智已用完')
+                return True
+            return False
+    def isCheckAuto(self):
+        pass
 class exp_5Thread(QThread):
     #经验本5
     def __init__(self):
@@ -36,7 +66,7 @@ class exp_5Thread(QThread):
             if ut.img_match('主页设置按钮'):
                 self.work()
                 break
-            elif returnHome():
+            elif funtools.returnHome():
                 self.work()
             else:
                 print('无法找到主页')
@@ -47,20 +77,8 @@ class exp_5Thread(QThread):
         ut.touchName('战术演习')
         ut.touchName('ls5')
         # for i in range():
-        while True:
-            ut.touchName('战斗准备')
-            if outRealize():
-                return
-            ut.touchName('战斗准备1')
-            while True:
-                ut.sleep()
-                print('等待战斗完成')
-                if ut.img_match('战斗完成'):
-                    break
-            ut.sleep(10)
-            ut.touchName('战斗完成')
-            ut.sleep()
-
+        funtools.whileBattleRound()
+funtools = Funtools()
 class connectDevThread(QThread):
     #连接设备
     sinOut = pyqtSignal(bool)
@@ -101,7 +119,7 @@ class autoFriendThread(QThread):
     def run(self) :
         if ut.img_match('主页设置按钮'):
             self.work()
-        if not returnHome():
+        if not funtools.returnHome():
             print('无法找到主页')
             return
         elif ut.img_match('主页设置按钮'):
@@ -111,12 +129,14 @@ class autoFriendThread(QThread):
         ut.touchName('好友列表')
         ut.touchName('访问第一位好友')
         while True:
+            ut.sleep(1)
             if ut.img_match('下一位暗'):
                 #todo 判断出错暂未解决
-                returnHome()
+                funtools.returnHome()
                 print('好友访问完成')
             else:
                 ut.touchName('访问下一位')
+
 
 
 class autoCountThread(QThread):
@@ -126,31 +146,9 @@ class autoCountThread(QThread):
     def run(self):
         ac = start.autoCount
         if ac == 0:
-            while True:
-                ut.touchName('战斗准备')
-                if outRealize():
-                    return
-                ut.touchName('战斗准备')
-                while True:
-                    ut.sleep()
-                    print('等待战斗完成')
-                    if ut.img_match('战斗完成'):
-                        break
-                ut.sleep(10)
-                ut.touchName('战斗完成')
-                ut.sleep()
+           funtools.whileBattleRound()
         for i in range(1,ac+1):
-            ut.touchName('战斗准备')
-            if outRealize():
-                return
-            ut.touchName('战斗准备')
-            while True:
-                ut.sleep()
-                print('等待战斗完成')
-                if ut.img_match('战斗完成'):
-                    break
-            ut.sleep(10)
-            ut.touchName('战斗完成')
+            funtools.whileBattleRound()
 
 
 

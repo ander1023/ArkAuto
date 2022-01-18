@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QMessageBox
 
 from ArknightsThread import *
 from arknightsUI import Ui_MainWindow
-from arknightsUtils import ut
+from arknightsBaseUtils import ut
 
 from HitokotoApi import getHitokotoText
 
@@ -128,3 +128,5 @@ if __name__ == "__main__":
     #todo 添加置顶按钮
     #todo 调整窗口出现位置
     #todo 添加是否使用理智按钮
+    #todo 刷完关机
+    #todo 自动购买商店
