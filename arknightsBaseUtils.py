@@ -17,10 +17,10 @@ class Utils:
                 self.__dev = Android('emulator-5554')
 
             except:
-                print('dev not found')
+                # print('dev not found')
                 return False
             if self.__dev != None:
-                print('dev connect')
+                # print('dev connect')
                 return True
 
     # def getdev(self):
