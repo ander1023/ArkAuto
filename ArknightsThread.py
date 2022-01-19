@@ -79,6 +79,7 @@ class MainThread(QThread):
             else:
                 self.returnHome()
                 return
+            ut.sleep()
 
 
     def connectDevThread(self):
