@@ -105,13 +105,13 @@ class MainThread(QThread):
 
     def autoFriendThread_work(self):
         ut.touchName('好友')
-        if self.flag:
+        if not self.flag:
             return
         ut.touchName('好友列表')
-        if self.flag:
+        if not self.flag:
             return
         ut.touchName('访问第一位好友')
-        if self.flag:
+        if not self.flag:
             return
         while self.flag:
             ut.sleep(1)
@@ -121,7 +121,7 @@ class MainThread(QThread):
                 self.setLogLable('好友访问完成')
                 return
             else:
-                if self.flag:
+                if not self.flag:
                     return
                 self.setLogLable('访问下一位')
                 ut.touchName('访问下一位')
