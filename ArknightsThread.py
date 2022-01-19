@@ -52,22 +52,34 @@ class MainThread(QThread):
         self.setLogLable('经验五任务启动中..')
         while self.flag:
             if ut.img_match('主页设置按钮'):
+                ut.touchName('终端')
+                ut.touchName('日常子界面')
+                ut.touchName('战术演习')
+                ut.touchName('ls5')
                 self.exp_5Thread_work()
-                break
+                self.setLogLable('SUCCESS')
+                return
+
             elif self.returnHome():
+                ut.touchName('终端')
+                ut.touchName('日常子界面')
+                ut.touchName('战术演习')
+                ut.touchName('ls5')
                 self.exp_5Thread_work()
+                self.setLogLable('SUCCESS')
+                return
             else:
                 self.setLogLable('无法找到主页')
                 return
 
     def exp_5Thread_work(self):
-        ut.touchName('终端')
-        ut.touchName('日常子界面')
-        ut.touchName('战术演习')
-        ut.touchName('ls5')
-        # for i in range():
-        self.onceBattleRound()
-        self.setLogLable('SUCCESS')
+        while self.flag:
+            if self.enterBattle():
+                self.whileWaitBattleComplete()
+            else:
+                self.returnHome()
+                return
+
 
     def connectDevThread(self):
         if ut.connectDev():
@@ -105,13 +117,13 @@ class MainThread(QThread):
 
     def autoFriendThread_work(self):
         ut.touchName('好友')
-        if self.flag:
+        if not self.flag:
             return
         ut.touchName('好友列表')
-        if self.flag:
+        if not self.flag:
             return
         ut.touchName('访问第一位好友')
-        if self.flag:
+        if not self.flag:
             return
         while self.flag:
             ut.sleep(1)
@@ -121,7 +133,7 @@ class MainThread(QThread):
                 self.setLogLable('好友访问完成')
                 return
             else:
-                if self.flag:
+                if not self.flag:
                     return
                 self.setLogLable('访问下一位')
                 ut.touchName('访问下一位')
