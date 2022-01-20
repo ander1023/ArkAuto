@@ -120,10 +120,6 @@ class Ui_MainWindow(object):
 "background:rgba(255,255,255,0.7);\n"
 "border-radius:4px}")
         self.lineEdit.setObjectName("lineEdit")
-        self.autoCountBt.raise_()
-        self.label.raise_()
-        self.lineEdit.raise_()
-        self.layoutWidget.raise_()
         self.logLable.raise_()
         self.layoutWidget.raise_()
         self.layoutWidget.raise_()

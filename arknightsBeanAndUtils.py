@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
+import os
+
 from airtest.aircv import crop_image
 from airtest.core.android.android import Android
 from airtest.core.api import *
@@ -71,6 +73,7 @@ class Utils:
         self.flag = False
     def connectDev(self):
         try:
+            os.system('adb devices')
             self._dev = Android('emulator-5554')
             # print(self._dev.get_default_device())
         except:

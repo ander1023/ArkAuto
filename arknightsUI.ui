@@ -233,10 +233,6 @@ border-radius:4px}</string>
       <string>0</string>
      </property>
     </widget>
-    <zorder>autoCountBt</zorder>
-    <zorder>label</zorder>
-    <zorder>lineEdit</zorder>
-    <zorder>layoutWidget</zorder>
    </widget>
    <zorder>logLable</zorder>
    <zorder>layoutWidget</zorder>
