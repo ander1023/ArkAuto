@@ -120,11 +120,15 @@ class Ui_MainWindow(object):
 "background:rgba(255,255,255,0.7);\n"
 "border-radius:4px}")
         self.lineEdit.setObjectName("lineEdit")
+        self.shutdownBt = QtWidgets.QPushButton(self.centralwidget)
+        self.shutdownBt.setGeometry(QtCore.QRect(10, 35, 51, 23))
+        self.shutdownBt.setObjectName("shutdownBt")
         self.logLable.raise_()
         self.layoutWidget.raise_()
         self.layoutWidget.raise_()
         self.widget_3.raise_()
         self.setTopBt.raise_()
+        self.shutdownBt.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusBar = QtWidgets.QStatusBar(MainWindow)
         self.statusBar.setObjectName("statusBar")
@@ -146,4 +150,5 @@ class Ui_MainWindow(object):
         self.autoCountBt.setText(_translate("MainWindow", "自动刷本"))
         self.label.setText(_translate("MainWindow", "指定重复次数"))
         self.lineEdit.setText(_translate("MainWindow", "0"))
+        self.shutdownBt.setText(_translate("MainWindow", "关机"))
 import ui_rc

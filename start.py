@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
+import os
 import time
 
 import win32con
@@ -46,7 +47,7 @@ class MainUI(QMainWindow):
         self.ui.autoCountBt.clicked.connect(self.autoCount)
         self.ui.stopAllBt.clicked.connect(self.closeMainThread)
         self.ui.setTopBt.clicked.connect(self.setTopBt)
-
+        self.ui.shutdownBt.clicked.connect(self.shutdownBt)
         self.ui.expMapBt.setStatusTip('请在首页点击 开始经验五')
         self.ui.devConnectBt.setStatusTip('连接设备 默认雷电')
         self.ui.startGameBt.setStatusTip('自动启动游戏至首页')
@@ -56,6 +57,7 @@ class MainUI(QMainWindow):
         self.ui.setTopBt.setStatusTip('窗口是否置顶')
         self.ui.logLable.setStatusTip('状态')
         self.ui.lineEdit.setStatusTip('0 清完体力（不喝药）')
+        self.ui.shutdownBt.setStatusTip('点击弹出关机界面')
 
     def initThread(self):
         self.MThread_Signal.connect(self.WThread.getSignal)
@@ -121,7 +123,8 @@ class MainUI(QMainWindow):
             self.startFun('["autoCountThread",' + str(autoCount) + ']')
         except:
             pass
-
+    def shutdownBt(self):
+        os.system('start ./gj.py')
     # ------------------------------------tools-----------------------------------
     def setLogLable(self, text):
         self.ui.logLable.setText(text + '\n' + time.strftime("%H:%M:%S", time.localtime()))

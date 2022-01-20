@@ -234,11 +234,25 @@ border-radius:4px}</string>
      </property>
     </widget>
    </widget>
+   <widget class="QPushButton" name="shutdownBt">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>35</y>
+      <width>51</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>关机</string>
+    </property>
+   </widget>
    <zorder>logLable</zorder>
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
    <zorder>widget_3</zorder>
    <zorder>setTopBt</zorder>
+   <zorder>shutdownBt</zorder>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
