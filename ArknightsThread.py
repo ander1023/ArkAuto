@@ -74,6 +74,7 @@ class WorkThread(QThread):
             else:
                 self._returnHome()
                 return
+            ut.sleep()
 
 
     def connectDevThread(self):
