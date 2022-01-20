@@ -15,7 +15,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
-        MainWindow.resize(653, 474)
+        MainWindow.resize(659, 460)
         MainWindow.setStyleSheet("*{\n"
 "font-family: \"Microsoft YaHei\";\n"
 "font-weight:bold;\n"
@@ -33,13 +33,15 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "QPushButton,QCheckBox{\n"
-"border:rgba(255,255,255,0.8);\n"
+"border-image:none;\n"
+"border:2px solid rgba(255,255,255,0.4);\n"
 "background:rgba(255,255,255,0.7);\n"
 "height:30px;\n"
 "border-radius:4px\n"
 "}\n"
 "QPushButton:pressed,QCheckBox:pressed{\n"
-"background-color:rgba(255,255,255,0.5);\n"
+"background-color:rgba(0,0,0,0.5);\n"
+"color:rgba(255,255,255)\n"
 "}\n"
 "QPushButton:hover,QCheckBox:hover{\n"
 "background-color:rgba(0,0,0,0.3);\n"
@@ -55,7 +57,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.centralwidget.setObjectName("centralwidget")
         self.logLable = QtWidgets.QLabel(self.centralwidget)
-        self.logLable.setGeometry(QtCore.QRect(130, 50, 371, 71))
+        self.logLable.setGeometry(QtCore.QRect(150, 50, 371, 71))
         font = QtGui.QFont()
         font.setFamily("Microsoft YaHei")
         font.setPointSize(-1)
@@ -66,7 +68,7 @@ class Ui_MainWindow(object):
         self.logLable.setAlignment(QtCore.Qt.AlignCenter)
         self.logLable.setObjectName("logLable")
         self.widget = QtWidgets.QWidget(self.centralwidget)
-        self.widget.setGeometry(QtCore.QRect(80, 280, 389, 59))
+        self.widget.setGeometry(QtCore.QRect(80, 280, 361, 59))
         self.widget.setObjectName("widget")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.widget)
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -78,8 +80,10 @@ class Ui_MainWindow(object):
         self.expMapBt.setObjectName("expMapBt")
         self.horizontalLayout_2.addWidget(self.expMapBt)
         self.setTopBt = QtWidgets.QCheckBox(self.centralwidget)
-        self.setTopBt.setGeometry(QtCore.QRect(10, 10, 51, 16))
+        self.setTopBt.setGeometry(QtCore.QRect(10, 10, 61, 31))
+        self.setTopBt.setStyleSheet("")
         self.setTopBt.setChecked(True)
+        self.setTopBt.setTristate(False)
         self.setTopBt.setObjectName("setTopBt")
         self.widget1 = QtWidgets.QWidget(self.centralwidget)
         self.widget1.setGeometry(QtCore.QRect(80, 360, 539, 69))
@@ -97,21 +101,27 @@ class Ui_MainWindow(object):
         self.startGameBt.setObjectName("startGameBt")
         self.horizontalLayout.addWidget(self.startGameBt)
         self.widget_3 = QtWidgets.QWidget(self.centralwidget)
-        self.widget_3.setGeometry(QtCore.QRect(80, 200, 125, 57))
+        self.widget_3.setGeometry(QtCore.QRect(80, 200, 181, 57))
         self.widget_3.setObjectName("widget_3")
         self.autoCountBt = QtWidgets.QPushButton(self.widget_3)
-        self.autoCountBt.setGeometry(QtCore.QRect(0, 26, 121, 30))
+        self.autoCountBt.setGeometry(QtCore.QRect(0, 26, 171, 30))
         self.autoCountBt.setObjectName("autoCountBt")
         self.label = QtWidgets.QLabel(self.widget_3)
-        self.label.setGeometry(QtCore.QRect(0, 6, 101, 16))
+        self.label.setGeometry(QtCore.QRect(10, 0, 101, 16))
+        self.label.setStyleSheet("*{\n"
+"font-size:15px;\n"
+"}")
         self.label.setObjectName("label")
         self.lineEdit = QtWidgets.QLineEdit(self.widget_3)
-        self.lineEdit.setGeometry(QtCore.QRect(98, 3, 21, 20))
+        self.lineEdit.setGeometry(QtCore.QRect(130, 0, 41, 20))
         self.lineEdit.setStyleSheet("*{border-image:none;\n"
 "background:rgba(255,255,255,0.7);\n"
 "border-radius:4px}")
         self.lineEdit.setObjectName("lineEdit")
         MainWindow.setCentralWidget(self.centralwidget)
+        self.statusBar = QtWidgets.QStatusBar(MainWindow)
+        self.statusBar.setObjectName("statusBar")
+        MainWindow.setStatusBar(self.statusBar)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -119,13 +129,15 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.logLable.setText(_translate("MainWindow", "QLabel"))
+        self.logLable.setText(_translate("MainWindow", "Arknights"))
+        self.autoFriendsBt.setToolTip(_translate("MainWindow", "<html><head/><body><p><br/></p></body></html>"))
         self.autoFriendsBt.setText(_translate("MainWindow", "好友访问"))
         self.expMapBt.setText(_translate("MainWindow", "经验五"))
         self.setTopBt.setText(_translate("MainWindow", "置顶"))
         self.devConnectBt.setText(_translate("MainWindow", "连接设备"))
         self.stopAllBt.setText(_translate("MainWindow", "停止"))
         self.startGameBt.setText(_translate("MainWindow", "启动游戏"))
+        self.autoCountBt.setToolTip(_translate("MainWindow", "<html><head/><body><p><br/></p></body></html>"))
         self.autoCountBt.setText(_translate("MainWindow", "自动刷本"))
         self.label.setText(_translate("MainWindow", "指定重复次数"))
         self.lineEdit.setText(_translate("MainWindow", "0"))

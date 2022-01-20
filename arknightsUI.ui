@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>653</width>
-    <height>474</height>
+    <width>659</width>
+    <height>460</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,13 +34,15 @@ font-weight:bold
 }
 
 QPushButton,QCheckBox{
-border:rgba(255,255,255,0.8);
+border-image:none;
+border:2px solid rgba(255,255,255,0.4);
 background:rgba(255,255,255,0.7);
 height:30px;
 border-radius:4px
 }
 QPushButton:pressed,QCheckBox:pressed{
-background-color:rgba(255,255,255,0.5);
+background-color:rgba(0,0,0,0.5);
+color:rgba(255,255,255)
 }
 QPushButton:hover,QCheckBox:hover{
 background-color:rgba(0,0,0,0.3);
@@ -62,7 +64,7 @@ background-color:rgba(0,0,0,0.3);
    <widget class="QLabel" name="logLable">
     <property name="geometry">
      <rect>
-      <x>130</x>
+      <x>150</x>
       <y>50</y>
       <width>371</width>
       <height>71</height>
@@ -80,7 +82,7 @@ background-color:rgba(0,0,0,0.3);
      <string notr="true">*{color:black;border-radius:10px;font-size:16px}</string>
     </property>
     <property name="text">
-     <string>QLabel</string>
+     <string>Arknights</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -91,13 +93,16 @@ background-color:rgba(0,0,0,0.3);
      <rect>
       <x>80</x>
       <y>280</y>
-      <width>389</width>
+      <width>361</width>
       <height>59</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QPushButton" name="autoFriendsBt">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
        <property name="text">
         <string>好友访问</string>
        </property>
@@ -117,15 +122,21 @@ background-color:rgba(0,0,0,0.3);
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>51</width>
-      <height>16</height>
+      <width>61</width>
+      <height>31</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>置顶</string>
     </property>
     <property name="checked">
      <bool>true</bool>
+    </property>
+    <property name="tristate">
+     <bool>false</bool>
     </property>
    </widget>
    <widget class="QWidget" name="">
@@ -166,7 +177,7 @@ background-color:rgba(0,0,0,0.3);
      <rect>
       <x>80</x>
       <y>200</y>
-      <width>125</width>
+      <width>181</width>
       <height>57</height>
      </rect>
     </property>
@@ -175,9 +186,12 @@ background-color:rgba(0,0,0,0.3);
       <rect>
        <x>0</x>
        <y>26</y>
-       <width>121</width>
+       <width>171</width>
        <height>30</height>
       </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="text">
       <string>自动刷本</string>
@@ -186,11 +200,16 @@ background-color:rgba(0,0,0,0.3);
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>6</y>
+       <x>10</x>
+       <y>0</y>
        <width>101</width>
        <height>16</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">*{
+font-size:15px;
+}</string>
      </property>
      <property name="text">
       <string>指定重复次数</string>
@@ -199,9 +218,9 @@ background-color:rgba(0,0,0,0.3);
     <widget class="QLineEdit" name="lineEdit">
      <property name="geometry">
       <rect>
-       <x>98</x>
-       <y>3</y>
-       <width>21</width>
+       <x>130</x>
+       <y>0</y>
+       <width>41</width>
        <height>20</height>
       </rect>
      </property>
@@ -216,6 +235,7 @@ border-radius:4px}</string>
     </widget>
    </widget>
   </widget>
+  <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <resources>
   <include location="ui.qrc"/>
