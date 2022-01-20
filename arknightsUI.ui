@@ -9,213 +9,210 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>390</width>
-    <height>290</height>
+    <width>653</width>
+    <height>474</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">*{
+font-family: &quot;Microsoft YaHei&quot;;
+font-weight:bold;
+font-size:14px;
+}
+QWidget{
+background:#99ccff
+}
+
+QLabel{
+color:#fff;
+background:transparent;
+font-size:14px;
+font-weight:bold
+}
+
+QPushButton,QCheckBox{
+border:rgba(255,255,255,0.8);
+background:rgba(255,255,255,0.7);
+height:30px;
+border-radius:4px
+}
+QPushButton:pressed,QCheckBox:pressed{
+background-color:rgba(255,255,255,0.5);
+}
+QPushButton:hover,QCheckBox:hover{
+background-color:rgba(0,0,0,0.3);
+}
+</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="font">
     <font>
-     <family>宋体</family>
+     <family>Microsoft YaHei</family>
+     <pointsize>-1</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
     </font>
    </property>
    <property name="cursor">
     <cursorShape>ArrowCursor</cursorShape>
    </property>
-   <widget class="QFrame" name="frame">
+   <widget class="QLabel" name="logLable">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>400</width>
-      <height>300</height>
+      <x>130</x>
+      <y>50</y>
+      <width>371</width>
+      <height>71</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Microsoft YaHei</family>
+      <pointsize>-1</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="styleSheet">
-     <string notr="true">QFrame{background-image: url(:/新前缀/ui_img/background.png);border:none}
-
-QLabel{color:#fff;background:transparent;font-size:14px;font-weight:bold}
-
-QPushButton{border:rgba(255,255,255,0.8);background:rgba(255,255,255,0.7);height:30px;border-radius:4px}
-QPushButton:pressed{background-color:rgba(255,255,255,0.5);}</string>
+     <string notr="true">*{color:black;border-radius:10px;font-size:16px}</string>
     </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
+    <property name="text">
+     <string>QLabel</string>
     </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
-    <widget class="QLabel" name="hitokotoLable">
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>280</y>
+      <width>389</width>
+      <height>59</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QPushButton" name="autoFriendsBt">
+       <property name="text">
+        <string>好友访问</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="expMapBt">
+       <property name="text">
+        <string>经验五</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QCheckBox" name="setTopBt">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>51</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>置顶</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>360</y>
+      <width>539</width>
+      <height>69</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="devConnectBt">
+       <property name="text">
+        <string>连接设备</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="stopAllBt">
+       <property name="text">
+        <string>停止</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="startGameBt">
+       <property name="text">
+        <string>启动游戏</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="widget_3" native="true">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>200</y>
+      <width>125</width>
+      <height>57</height>
+     </rect>
+    </property>
+    <widget class="QPushButton" name="autoCountBt">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>100</y>
-       <width>381</width>
-       <height>81</height>
+       <y>26</y>
+       <width>121</width>
+       <height>30</height>
       </rect>
      </property>
-     <property name="styleSheet">
-      <string notr="true">&lt;--*{background:rgba(255,255,255,0.7);color:rgb(0,0,0);border-radius:10px}!--&gt;</string>
-     </property>
      <property name="text">
-      <string/>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-     <property name="margin">
-      <number>10</number>
+      <string>自动刷本</string>
      </property>
     </widget>
-    <widget class="QLabel" name="logLable">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>50</y>
-       <width>371</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>-1</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">*{color:black;border-radius:10px;font-size:16px}</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-    <widget class="QWidget" name="verticalLayoutWidget">
+    <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>97</y>
-       <width>391</width>
-       <height>191</height>
+       <y>6</y>
+       <width>101</width>
+       <height>16</height>
       </rect>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <item>
-         <widget class="QWidget" name="widget_5" native="true"/>
-        </item>
-        <item>
-         <widget class="QWidget" name="widget_3" native="true">
-          <widget class="QPushButton" name="autoCountBt">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>26</y>
-             <width>121</width>
-             <height>30</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>自动刷本</string>
-           </property>
-          </widget>
-          <widget class="QLabel" name="label">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>6</y>
-             <width>101</width>
-             <height>16</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>指定重复次数</string>
-           </property>
-          </widget>
-          <widget class="QLineEdit" name="lineEdit">
-           <property name="geometry">
-            <rect>
-             <x>98</x>
-             <y>3</y>
-             <width>21</width>
-             <height>20</height>
-            </rect>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">*{border-image:none;
- border:2px solid rgb(100,50,30);background:rgba(255,255,255,0.7);border-radius:4px}</string>
-           </property>
-           <property name="text">
-            <string>0</string>
-           </property>
-          </widget>
-         </widget>
-        </item>
-        <item>
-         <widget class="QWidget" name="widget_4" native="true"/>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QWidget" name="widget" native="true"/>
-        </item>
-        <item>
-         <widget class="QPushButton" name="devConnectBt">
-          <property name="text">
-           <string>连接设备</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="stopAllBt">
-          <property name="text">
-           <string>停止</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="startGameBt">
-          <property name="text">
-           <string>启动游戏</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QWidget" name="widget_2" native="true"/>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <item>
-         <widget class="QPushButton" name="autoFriendsBt">
-          <property name="text">
-           <string>好友访问</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="expMapBt">
-          <property name="text">
-           <string>开始刷本</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
+     <property name="text">
+      <string>指定重复次数</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit">
+     <property name="geometry">
+      <rect>
+       <x>98</x>
+       <y>3</y>
+       <width>21</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">*{border-image:none;
+background:rgba(255,255,255,0.7);
+border-radius:4px}</string>
+     </property>
+     <property name="text">
+      <string>0</string>
+     </property>
     </widget>
    </widget>
   </widget>

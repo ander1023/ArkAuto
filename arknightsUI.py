@@ -15,54 +15,89 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
-        MainWindow.resize(390, 290)
-        MainWindow.setStyleSheet("")
+        MainWindow.resize(653, 474)
+        MainWindow.setStyleSheet("*{\n"
+"font-family: \"Microsoft YaHei\";\n"
+"font-weight:bold;\n"
+"font-size:14px;\n"
+"}\n"
+"QWidget{\n"
+"background:#99ccff\n"
+"}\n"
+"\n"
+"QLabel{\n"
+"color:#fff;\n"
+"background:transparent;\n"
+"font-size:14px;\n"
+"font-weight:bold\n"
+"}\n"
+"\n"
+"QPushButton,QCheckBox{\n"
+"border:rgba(255,255,255,0.8);\n"
+"background:rgba(255,255,255,0.7);\n"
+"height:30px;\n"
+"border-radius:4px\n"
+"}\n"
+"QPushButton:pressed,QCheckBox:pressed{\n"
+"background-color:rgba(255,255,255,0.5);\n"
+"}\n"
+"QPushButton:hover,QCheckBox:hover{\n"
+"background-color:rgba(0,0,0,0.3);\n"
+"}\n"
+"")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         font = QtGui.QFont()
-        font.setFamily("宋体")
+        font.setFamily("Microsoft YaHei")
+        font.setPointSize(-1)
+        font.setBold(True)
+        font.setWeight(75)
         self.centralwidget.setFont(font)
         self.centralwidget.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.centralwidget.setObjectName("centralwidget")
-        self.frame = QtWidgets.QFrame(self.centralwidget)
-        self.frame.setGeometry(QtCore.QRect(0, 0, 400, 300))
-        self.frame.setStyleSheet("QFrame{background-image: url(:/新前缀/ui_img/background.png);border:none}\n"
-"\n"
-"QLabel{color:#fff;background:transparent;font-size:14px;font-weight:bold}\n"
-"\n"
-"QPushButton{border:rgba(255,255,255,0.8);background:rgba(255,255,255,0.7);height:30px;border-radius:4px}\n"
-"QPushButton:pressed{background-color:rgba(255,255,255,0.5);}")
-        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame.setObjectName("frame")
-        self.hitokotoLable = QtWidgets.QLabel(self.frame)
-        self.hitokotoLable.setGeometry(QtCore.QRect(0, 100, 381, 81))
-        self.hitokotoLable.setStyleSheet("<--*{background:rgba(255,255,255,0.7);color:rgb(0,0,0);border-radius:10px}!-->")
-        self.hitokotoLable.setText("")
-        self.hitokotoLable.setAlignment(QtCore.Qt.AlignCenter)
-        self.hitokotoLable.setObjectName("hitokotoLable")
-        self.logLable = QtWidgets.QLabel(self.frame)
-        self.logLable.setGeometry(QtCore.QRect(10, 50, 371, 41))
+        self.logLable = QtWidgets.QLabel(self.centralwidget)
+        self.logLable.setGeometry(QtCore.QRect(130, 50, 371, 71))
         font = QtGui.QFont()
+        font.setFamily("Microsoft YaHei")
         font.setPointSize(-1)
         font.setBold(True)
         font.setWeight(75)
         self.logLable.setFont(font)
         self.logLable.setStyleSheet("*{color:black;border-radius:10px;font-size:16px}")
-        self.logLable.setText("")
         self.logLable.setAlignment(QtCore.Qt.AlignCenter)
         self.logLable.setObjectName("logLable")
-        self.verticalLayoutWidget = QtWidgets.QWidget(self.frame)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 97, 391, 191))
-        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.widget_5 = QtWidgets.QWidget(self.verticalLayoutWidget)
-        self.widget_5.setObjectName("widget_5")
-        self.horizontalLayout_3.addWidget(self.widget_5)
-        self.widget_3 = QtWidgets.QWidget(self.verticalLayoutWidget)
+        self.widget = QtWidgets.QWidget(self.centralwidget)
+        self.widget.setGeometry(QtCore.QRect(80, 280, 389, 59))
+        self.widget.setObjectName("widget")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.widget)
+        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.autoFriendsBt = QtWidgets.QPushButton(self.widget)
+        self.autoFriendsBt.setObjectName("autoFriendsBt")
+        self.horizontalLayout_2.addWidget(self.autoFriendsBt)
+        self.expMapBt = QtWidgets.QPushButton(self.widget)
+        self.expMapBt.setObjectName("expMapBt")
+        self.horizontalLayout_2.addWidget(self.expMapBt)
+        self.setTopBt = QtWidgets.QCheckBox(self.centralwidget)
+        self.setTopBt.setGeometry(QtCore.QRect(10, 10, 51, 16))
+        self.setTopBt.setChecked(True)
+        self.setTopBt.setObjectName("setTopBt")
+        self.widget1 = QtWidgets.QWidget(self.centralwidget)
+        self.widget1.setGeometry(QtCore.QRect(80, 360, 539, 69))
+        self.widget1.setObjectName("widget1")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.widget1)
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.devConnectBt = QtWidgets.QPushButton(self.widget1)
+        self.devConnectBt.setObjectName("devConnectBt")
+        self.horizontalLayout.addWidget(self.devConnectBt)
+        self.stopAllBt = QtWidgets.QPushButton(self.widget1)
+        self.stopAllBt.setObjectName("stopAllBt")
+        self.horizontalLayout.addWidget(self.stopAllBt)
+        self.startGameBt = QtWidgets.QPushButton(self.widget1)
+        self.startGameBt.setObjectName("startGameBt")
+        self.horizontalLayout.addWidget(self.startGameBt)
+        self.widget_3 = QtWidgets.QWidget(self.centralwidget)
+        self.widget_3.setGeometry(QtCore.QRect(80, 200, 125, 57))
         self.widget_3.setObjectName("widget_3")
         self.autoCountBt = QtWidgets.QPushButton(self.widget_3)
         self.autoCountBt.setGeometry(QtCore.QRect(0, 26, 121, 30))
@@ -73,40 +108,9 @@ class Ui_MainWindow(object):
         self.lineEdit = QtWidgets.QLineEdit(self.widget_3)
         self.lineEdit.setGeometry(QtCore.QRect(98, 3, 21, 20))
         self.lineEdit.setStyleSheet("*{border-image:none;\n"
-" border:2px solid rgb(100,50,30);background:rgba(255,255,255,0.7);border-radius:4px}")
+"background:rgba(255,255,255,0.7);\n"
+"border-radius:4px}")
         self.lineEdit.setObjectName("lineEdit")
-        self.horizontalLayout_3.addWidget(self.widget_3)
-        self.widget_4 = QtWidgets.QWidget(self.verticalLayoutWidget)
-        self.widget_4.setObjectName("widget_4")
-        self.horizontalLayout_3.addWidget(self.widget_4)
-        self.verticalLayout.addLayout(self.horizontalLayout_3)
-        self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.widget = QtWidgets.QWidget(self.verticalLayoutWidget)
-        self.widget.setObjectName("widget")
-        self.horizontalLayout.addWidget(self.widget)
-        self.devConnectBt = QtWidgets.QPushButton(self.verticalLayoutWidget)
-        self.devConnectBt.setObjectName("devConnectBt")
-        self.horizontalLayout.addWidget(self.devConnectBt)
-        self.stopAllBt = QtWidgets.QPushButton(self.verticalLayoutWidget)
-        self.stopAllBt.setObjectName("stopAllBt")
-        self.horizontalLayout.addWidget(self.stopAllBt)
-        self.startGameBt = QtWidgets.QPushButton(self.verticalLayoutWidget)
-        self.startGameBt.setObjectName("startGameBt")
-        self.horizontalLayout.addWidget(self.startGameBt)
-        self.widget_2 = QtWidgets.QWidget(self.verticalLayoutWidget)
-        self.widget_2.setObjectName("widget_2")
-        self.horizontalLayout.addWidget(self.widget_2)
-        self.verticalLayout.addLayout(self.horizontalLayout)
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.autoFriendsBt = QtWidgets.QPushButton(self.verticalLayoutWidget)
-        self.autoFriendsBt.setObjectName("autoFriendsBt")
-        self.horizontalLayout_2.addWidget(self.autoFriendsBt)
-        self.expMapBt = QtWidgets.QPushButton(self.verticalLayoutWidget)
-        self.expMapBt.setObjectName("expMapBt")
-        self.horizontalLayout_2.addWidget(self.expMapBt)
-        self.verticalLayout.addLayout(self.horizontalLayout_2)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -115,12 +119,14 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.autoCountBt.setText(_translate("MainWindow", "自动刷本"))
-        self.label.setText(_translate("MainWindow", "指定重复次数"))
-        self.lineEdit.setText(_translate("MainWindow", "0"))
+        self.logLable.setText(_translate("MainWindow", "QLabel"))
+        self.autoFriendsBt.setText(_translate("MainWindow", "好友访问"))
+        self.expMapBt.setText(_translate("MainWindow", "经验五"))
+        self.setTopBt.setText(_translate("MainWindow", "置顶"))
         self.devConnectBt.setText(_translate("MainWindow", "连接设备"))
         self.stopAllBt.setText(_translate("MainWindow", "停止"))
         self.startGameBt.setText(_translate("MainWindow", "启动游戏"))
-        self.autoFriendsBt.setText(_translate("MainWindow", "好友访问"))
-        self.expMapBt.setText(_translate("MainWindow", "开始刷本"))
+        self.autoCountBt.setText(_translate("MainWindow", "自动刷本"))
+        self.label.setText(_translate("MainWindow", "指定重复次数"))
+        self.lineEdit.setText(_translate("MainWindow", "0"))
 import ui_rc

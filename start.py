@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
+import win32con
+import win32gui
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QThread, pyqtSignal, Qt
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QMessageBox
@@ -33,13 +35,15 @@ class MainUI(QMainWindow):
         self.setWindowTitle('Arknights by大山猛')
         self.setWindowIcon(QIcon('ui_img/icon.jpg'))
 
+
+
         self.ui.expMapBt.clicked.connect(self.btEven)
         self.ui.devConnectBt.clicked.connect(self.btEven)
         self.ui.startGameBt.clicked.connect(self.btEven)
         self.ui.autoFriendsBt.clicked.connect(self.btEven)
         self.ui.autoCountBt.clicked.connect(self.btEven)
         self.ui.stopAllBt.clicked.connect(self.btEven)
-
+        self.ui.setTopBt.clicked.connect(self.setTopBt)
     def initThread(self):
         self.MThread_Signal.connect(self.MThread.getSignal)
         self.MThread.signal.connect(self.setLogLable)
@@ -48,11 +52,21 @@ class MainUI(QMainWindow):
     def closeMainThread(self):
         if self.MThread.isRunning():
             self.MThread_Signal.emit('close')
-            self.setLogLable('正在结束任务')
+            self.setLogLable('结束任务')
+            try:
+                self.MThread.quit()
+                self.MThread.wait()
+            except:
+                pass
 
-    def initHitokoto(self):
-        self.haT.start()
-        self.haT.sinOut.connect(self.HitokotoThread_callback)
+    # def initHitokoto(self):
+    #     self.haT.start()
+    #     self.haT.sinOut.connect(self.HitokotoThread_callback)
+    def setTopBt(self):
+        if self.sender().isChecked():
+            win32gui.SetWindowPos(self.winId(),win32con.HWND_TOPMOST,self.x()-7,self.y(),self.width(),self.height(),win32con.SWP_SHOWWINDOW)
+        else:
+            win32gui.SetWindowPos(self.winId(),win32con.HWND_NOTOPMOST,self.x()-7,self.y(),self.width(),self.height(),win32con.SWP_SHOWWINDOW)
 
     def btEven(self):
         if not self.MThread.isRunning():
