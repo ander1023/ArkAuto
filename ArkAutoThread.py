@@ -4,10 +4,15 @@ import time
 
 from PyQt5.QtCore import QThread, pyqtSignal
 
-from HitokotoApi import getHitokotoText
-from arknightsBeanAndUtils import ut
+# from HitokotoApi import getHitokotoText
+from ArkAutoBeanAndUtils import ut
 
-
+class WorkSignal:
+    #todo 编写signal通信
+    def __init__(self):
+        pass
+    def getSignal(self):
+        pass
 # -----------------------------------Thread-----------------------------------
 class WorkThread(QThread):
     signal = pyqtSignal(str)  # 发送
@@ -17,6 +22,7 @@ class WorkThread(QThread):
     def __init__(self):
         super(WorkThread, self).__init__()
         self.battleCount = 0
+        # WS = WorkSignal()
 
     def run(self):
         time.sleep(1)  # 等待判断
@@ -38,6 +44,8 @@ class WorkThread(QThread):
         self._setLogLable('SUCCESS')
 
     def getSignal(self, text):
+        self.signal_str = None
+        self.data = -1
         try:
             textList = eval(text)
         except:
@@ -52,18 +60,18 @@ class WorkThread(QThread):
     def exp_5Thread(self):
         while ut.getFlag():
             if ut.img_match('主页设置按钮'):
-                ut.touchName('终端')
-                ut.touchName('日常子界面')
-                ut.touchName('战术演习')
-                ut.touchName('ls5')
+                self._touch('终端')
+                self._touch('日常子界面')
+                self._touch('战术演习')
+                self._touch('LS_5')
                 self._exp_5Thread_work()
                 return
 
             elif self._returnHome():
-                ut.touchName('终端')
-                ut.touchName('日常子界面')
-                ut.touchName('战术演习')
-                ut.touchName('ls5')
+                self._touch('终端')
+                self._touch('日常子界面')
+                self._touch('战术演习')
+                self._touch('LS_5')
                 self._exp_5Thread_work()
                 return
             self._setLogLable('无法找到主页')
@@ -90,39 +98,40 @@ class WorkThread(QThread):
         self._setLogLable('加载中')
         while ut.getFlag():
             if ut.img_match('加载'):
-                ut.touchName('加载')
+                self._touch('加载')
                 break
             ut.sleep()
-        self._setLogLable('加载完成')
         while ut.getFlag():
             if ut.img_match('开始唤醒'):
-                ut.touchName('开始唤醒')
+                self._touch('开始唤醒')
                 break
             ut.sleep()
 
     def autoFriendThread(self):
-        if ut.img_match('主页设置按钮'):
+        if ut.img_match('主页好友按钮'):
             self._autoFriendThread_work()
+            return
         elif self._returnHome():
             if ut.img_match('主页设置按钮'):
                 self._autoFriendThread_work()
-        else:
-            self._setLogLable('无法找到主页')
+            return
+        self._setLogLable('无法找到主页')
 
     def _autoFriendThread_work(self):
-        ut.touchName('好友')
-        ut.touchName('好友列表')
-        ut.touchName('访问第一位好友')
+        self._touch('好友')
+        self._touch('好友列表')
+        self._touch('访问第一位好友')
         while ut.getFlag():
             ut.sleep(1)
-            if ut.img_match('下一位暗'):
+
+            if ut.img_match('下一位亮'):
                 # todo 判断出错暂未解决
+                # 已解决 路径出错 & 灰度图片对比
+                self._touch('访问下一位')
+            else:
                 self._returnHome()
                 self._setLogLable('好友访问完成')
                 return
-            else:
-                self._setLogLable('访问下一位')
-                ut.touchName('访问下一位')
 
     def autoCountThread(self):
         ac = self.data
@@ -149,27 +158,28 @@ class WorkThread(QThread):
         self._returnHome()
 
     # -------------------------tool--------------------
+    def _touch(self,name):
+        self._setLogLable(name)
+        ut.touchName(name)
     def _enterBattle(self):
-        self._setLogLable('开始行动')
-        ut.touchName('战斗准备')
+        self._isCheckAuto()
+        self._touch('战斗准备')
         # todo 添加按钮判断
         if self._outRealize():
             return False
             # todo 如果outRealize方法修改 则判断没有药时为false
-        ut.touchName('战斗准备1')
+        self._touch('战斗准备1')
         return True
 
     def _whileWaitBattleComplete(self):
         self._setLogLable('等待战斗结束')
         while ut.getFlag():
             if ut.img_match('作战简报'):
-                ut.touchName('剿灭完成')
+                self._touch('剿灭完成')
                 ut.sleep(5)
-                self._setLogLable('剿灭完成')
             if ut.img_match('战斗完成'):
                 ut.sleep(5)
-                self._setLogLable('战斗完成')
-                ut.touchName('战斗完成')
+                self._touch('战斗完成')
                 return True
             ut.sleep()
 
@@ -177,11 +187,11 @@ class WorkThread(QThread):
         # 返回主页面
         self._setLogLable('开始返回主页面')
         if ut.img_match('bar首页'):
-            ut.touchName('bar首页')
+            self._touch('bar首页')
             return True
         elif ut.img_match('barhome'):
-            ut.touchName('barhome')
-            ut.touchName('bar首页')
+            self._touch('barhome')
+            self._touch('bar首页')
             return True
         return False
 
@@ -191,14 +201,17 @@ class WorkThread(QThread):
         # todo 源石嗑药界面
         if ut.img_match('理智界面') or ut.img_match('源石理智界面'):
             self._setLogLable('处理理智界面')
-            ut.touchName('理智界面x')
+            self._touch('理智界面x')
             self._setLogLable('理智已用完')
             # todo 暂定上
             return True
         return False
 
     def _isCheckAuto(self):
-        pass
+        if ut.img_match('代理指挥'):
+            pass
+        else:
+            self._touch('代理指挥')
 
     def _setLogLable(self, text):
         if text != 'SUCCESS' and not ut.getFlag():

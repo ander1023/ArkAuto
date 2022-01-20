@@ -9,11 +9,11 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QThread, pyqtSignal, Qt
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QMessageBox
 
-from ArknightsThread import WorkThread
-from arknightsUI import Ui_MainWindow
-from arknightsBeanAndUtils import ut
+from ArkAutoThread import WorkThread
+from ArkAutoUI import Ui_MainWindow
+from ArkAutoBeanAndUtils import ut
 
-from HitokotoApi import getHitokotoText
+# from HitokotoApi import getHitokotoText
 
 import sys
 
@@ -50,8 +50,8 @@ class MainUI(QMainWindow):
         self.ui.shutdownBt.clicked.connect(self.shutdownBt)
         self.ui.expMapBt.setStatusTip('请在首页点击 开始经验五')
         self.ui.devConnectBt.setStatusTip('连接设备 默认雷电')
-        self.ui.startGameBt.setStatusTip('自动启动游戏至首页')
-        self.ui.autoFriendsBt.setStatusTip('自动拜访好友基建')
+        self.ui.startGameBt.setStatusTip('启动游戏至首页')
+        self.ui.autoFriendsBt.setStatusTip('拜访好友基建')
         self.ui.autoCountBt.setStatusTip('战斗页面自动循环（提前开启自动代理）')
         self.ui.stopAllBt.setStatusTip('停止现有任务')
         self.ui.setTopBt.setStatusTip('窗口是否置顶')
@@ -124,7 +124,7 @@ class MainUI(QMainWindow):
         except:
             pass
     def shutdownBt(self):
-        os.system('start ./gj.py')
+        os.system('start ./WinShutdown.py')
     # ------------------------------------tools-----------------------------------
     def setLogLable(self, text):
         self.ui.logLable.setText(text + '\n' + time.strftime("%H:%M:%S", time.localtime()))

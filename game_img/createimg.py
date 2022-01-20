@@ -33,3 +33,6 @@ wait(Template(r"tpl1642315884557.png", record_pos=(0.426, 0.212), resolution=(12
 wait(Template(r"tpl1642316165139.png", record_pos=(0.425, 0.21), resolution=(1280, 720)))
 wait(Template(r"tpl1642436676650.png", record_pos=(-0.393, -0.129), resolution=(1280, 720)))
 wait(Template(r"tpl1642671953935.png", record_pos=(0.127, -0.027), resolution=(1280, 720)))
+wait(Template(r"tpl1642695489837.png", record_pos=(-0.002, 0.12), resolution=(1280, 720)))
+exists(Template(r"tpl1642695536661.png", record_pos=(0.434, 0.187), resolution=(1280, 720)))
+exists(Template(r"tpl1642696553627.png", record_pos=(0.223, 0.232), resolution=(1280, 720)))
