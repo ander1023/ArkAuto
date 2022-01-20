@@ -37,8 +37,7 @@ class MainUI(QMainWindow):
         self.setWindowTitle('Arknights by大山猛')
         self.setWindowIcon(QIcon('ui_img/icon.jpg'))
         self.setFixedSize(self.width(), self.height())
-        win32gui.SetWindowPos(self.winId(), win32con.HWND_TOPMOST, self.x() - 7, self.y(), self.width(), self.height(),
-                              win32con.SWP_SHOWWINDOW)
+
 
         self.ui.expMapBt.clicked.connect(self.exp_5)
         self.ui.devConnectBt.clicked.connect(self.connectDev)
@@ -132,6 +131,9 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     ui = MainUI()
     ui.show()
+    win32gui.SetWindowPos(ui.winId(), win32con.HWND_TOPMOST, ui.x() - 7, ui.y(), ui.width(), ui.height(),
+                              win32con.SWP_SHOWWINDOW)
+
     sys.exit(app.exec_())
     # todo 添加置顶按钮
     # todo 调整窗口出现位置

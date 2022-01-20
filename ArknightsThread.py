@@ -33,7 +33,7 @@ class WorkThread(QThread):
             self.autoFriendThread()
         if self.signal_str == 'autoCountThread':
             self.autoCountThread()
-        ut.sleep(1)
+        time.sleep(1)
         self._setLogLable('SUCCESS')
 
     def getSignal(self, text):
@@ -44,6 +44,7 @@ class WorkThread(QThread):
         if len(textList)==1:
             self.signal_str = text
         if len(textList)>1:
+            self.signal_str = textList[0]
             self.data =int(textList[1])
 #----------------------------fun------------------------
     def exp_5Thread(self):
@@ -138,14 +139,23 @@ class WorkThread(QThread):
         if ac < 0:
             return
         if ac == 0:
-            self._onceBattleRound()
-            return
+            while ut.getFlag():
+                if self._enterBattle():
+                    self._whileWaitBattleComplete()
+                else:
+                    self._returnHome()
+                    return
+                ut.sleep()
+
         for i in range(1, ac + 1) :
             if not ut.getFlag():
                 return
             self._setLogLable('次数：' + str(i) + '次 还剩：' + str(ac + 1 - i) + '次')
             ut.sleep()
-            self._onceBattleRound()
+            if self._enterBattle():
+                self._whileWaitBattleComplete()
+            else:
+                break
         self._returnHome()
 
 
@@ -162,6 +172,7 @@ class WorkThread(QThread):
         return True
 
     def _whileWaitBattleComplete(self):
+        self._setLogLable('等待战斗结束')
         if not ut.getFlag():
             return
         while ut.getFlag():
@@ -176,16 +187,6 @@ class WorkThread(QThread):
                 return True
             ut.sleep()
 
-    def _onceBattleRound(self):
-        if not ut.getFlag():
-            return
-        self._setLogLable('开始副本循环')
-        while ut.getFlag():
-            if self._enterBattle():
-                self._setLogLable('等待战斗完成')
-                self._whileWaitBattleComplete()
-                return
-            ut.sleep()
 
     def _returnHome(self):
         if not ut.getFlag():
