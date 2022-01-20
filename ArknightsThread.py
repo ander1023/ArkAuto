@@ -10,9 +10,10 @@ from arknightsBeanAndUtils import ut
 
 # -----------------------------------Thread-----------------------------------
 class WorkThread(QThread):
-    signal = pyqtSignal(str)#发送
-    signal_str = None#接收
+    signal = pyqtSignal(str)  # 发送
+    signal_str = None  # 接收
     data = None
+
     def __init__(self):
         super(WorkThread, self).__init__()
         self.battleCount = 0
@@ -41,12 +42,13 @@ class WorkThread(QThread):
             textList = eval(text)
         except:
             textList = [text]
-        if len(textList)==1:
+        if len(textList) == 1:
             self.signal_str = text
-        if len(textList)>1:
+        if len(textList) > 1:
             self.signal_str = textList[0]
-            self.data =int(textList[1])
-#----------------------------fun------------------------
+            self.data = int(textList[1])
+
+    # ----------------------------fun------------------------
     def exp_5Thread(self):
         while ut.getFlag():
             if ut.img_match('主页设置按钮'):
@@ -64,9 +66,8 @@ class WorkThread(QThread):
                 ut.touchName('ls5')
                 self._exp_5Thread_work()
                 return
-            else:
-                self._setLogLable('无法找到主页')
-                return
+            self._setLogLable('无法找到主页')
+            return
 
     def _exp_5Thread_work(self):
         while ut.getFlag():
@@ -76,7 +77,6 @@ class WorkThread(QThread):
                 self._returnHome()
                 return
             ut.sleep()
-
 
     def connectDevThread(self):
         ut.connectDev()
@@ -110,27 +110,17 @@ class WorkThread(QThread):
             self._setLogLable('无法找到主页')
 
     def _autoFriendThread_work(self):
-        if not ut.getFlag():
-            return
         ut.touchName('好友')
-        if not ut.getFlag():
-            return
         ut.touchName('好友列表')
-        if not ut.getFlag():
-            return
         ut.touchName('访问第一位好友')
-        if not ut.getFlag():
-            return
         while ut.getFlag():
             ut.sleep(1)
-            if ut.img_match('下一位暗') and ut.getFlag():
+            if ut.img_match('下一位暗'):
                 # todo 判断出错暂未解决
                 self._returnHome()
                 self._setLogLable('好友访问完成')
                 return
             else:
-                if not ut.getFlag():
-                    return
                 self._setLogLable('访问下一位')
                 ut.touchName('访问下一位')
 
@@ -147,7 +137,7 @@ class WorkThread(QThread):
                     return
                 ut.sleep()
 
-        for i in range(1, ac + 1) :
+        for i in range(1, ac + 1):
             if not ut.getFlag():
                 return
             self._setLogLable('次数：' + str(i) + '次 还剩：' + str(ac + 1 - i) + '次')
@@ -158,14 +148,11 @@ class WorkThread(QThread):
                 break
         self._returnHome()
 
-
     # -------------------------tool--------------------
     def _enterBattle(self):
-        if not ut.getFlag():
-            return
         self._setLogLable('开始行动')
         ut.touchName('战斗准备')
-        #todo 添加按钮判断
+        # todo 添加按钮判断
         if self._outRealize():
             return False
             # todo 如果outRealize方法修改 则判断没有药时为false
@@ -174,8 +161,6 @@ class WorkThread(QThread):
 
     def _whileWaitBattleComplete(self):
         self._setLogLable('等待战斗结束')
-        if not ut.getFlag():
-            return
         while ut.getFlag():
             if ut.img_match('作战简报'):
                 ut.touchName('剿灭完成')
@@ -188,10 +173,7 @@ class WorkThread(QThread):
                 return True
             ut.sleep()
 
-
     def _returnHome(self):
-        if not ut.getFlag():
-            return
         # 返回主页面
         self._setLogLable('开始返回主页面')
         if ut.img_match('bar首页'):
@@ -204,8 +186,6 @@ class WorkThread(QThread):
         return False
 
     def _outRealize(self):
-        if not ut.getFlag():
-            return
         # todo 修改参数令其使用有两种情况
         # 嗑了我两颗石头！！！！！！！！
         # todo 源石嗑药界面
@@ -213,14 +193,16 @@ class WorkThread(QThread):
             self._setLogLable('处理理智界面')
             ut.touchName('理智界面x')
             self._setLogLable('理智已用完')
-            # self._returnHome()
-            #todo 暂定上
+            # todo 暂定上
             return True
         return False
 
     def _isCheckAuto(self):
         pass
+
     def _setLogLable(self, text):
+        if text != 'SUCCESS' and not ut.getFlag():
+            return
         self.signal.emit(text)
 
 #
