@@ -196,26 +196,24 @@ class WorkThread(QThread):
         self._setLogLable('开始返回主页面')
         if ut.img_match('bar首页'):
             ut.touchName('bar首页')
-            ut.sleep()
             return True
         elif ut.img_match('barhome'):
             ut.touchName('barhome')
             ut.touchName('bar首页')
-            ut.sleep()
-
             return True
-        else:
-            return False
+        return False
 
     def _outRealize(self):
         if not ut.getFlag():
             return
         # todo 修改参数令其使用有两种情况
-        if ut.img_match('理智界面'):
+        # 嗑了我两颗石头！！！！！！！！
+        # todo 源石嗑药界面
+        if ut.img_match('理智界面') or ut.img_match('源石理智界面'):
             self._setLogLable('处理理智界面')
             ut.touchName('理智界面x')
             self._setLogLable('理智已用完')
-            self._returnHome()
+            # self._returnHome()
             #todo 暂定上
             return True
         return False
