@@ -5,3 +5,4 @@
 - PyQt5.12
 - win32con、win32gui
 - 雷电模拟器（1280*720 dip 240）
+- windows 平台
