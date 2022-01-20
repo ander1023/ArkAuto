@@ -22,6 +22,7 @@ class WorkThread(QThread):
         ut.setFlagT()
         if self.signal_str == None:
             return
+        self._setLogLable('任务启动中')
         if self.signal_str == 'exp_5Thread':
             self.exp_5Thread()
         if self.signal_str == 'connectDevThread':
@@ -32,6 +33,8 @@ class WorkThread(QThread):
             self.autoFriendThread()
         if self.signal_str == 'autoCountThread':
             self.autoCountThread()
+        ut.sleep(1)
+        self._setLogLable('SUCCESS')
 
     def getSignal(self, text):
         try:
@@ -44,7 +47,6 @@ class WorkThread(QThread):
             self.data =int(textList[1])
 #----------------------------fun------------------------
     def exp_5Thread(self):
-        self._setLogLable('经验五任务启动中..')
         while ut.getFlag():
             if ut.img_match('主页设置按钮'):
                 ut.touchName('终端')
@@ -52,7 +54,6 @@ class WorkThread(QThread):
                 ut.touchName('战术演习')
                 ut.touchName('ls5')
                 self._exp_5Thread_work()
-                self._setLogLable('SUCCESS')
                 return
 
             elif self._returnHome():
@@ -61,7 +62,6 @@ class WorkThread(QThread):
                 ut.touchName('战术演习')
                 ut.touchName('ls5')
                 self._exp_5Thread_work()
-                self._setLogLable('SUCCESS')
                 return
             else:
                 self._setLogLable('无法找到主页')
@@ -84,7 +84,6 @@ class WorkThread(QThread):
             self._setLogLable('连接失败')
 
     def launchGameThread(self):
-        self._setLogLable('启动游戏中..')
         ut.startapp('com.hypergryph.arknights')
         self._setLogLable('加载中')
         while ut.getFlag():
@@ -98,10 +97,8 @@ class WorkThread(QThread):
                 ut.touchName('开始唤醒')
                 break
             ut.sleep()
-        self._setLogLable('SUCCESS')
 
     def autoFriendThread(self):
-        self._setLogLable('好友任务启动中..')
         if ut.img_match('主页设置按钮'):
             self._autoFriendThread_work()
         elif self._returnHome():
@@ -109,7 +106,6 @@ class WorkThread(QThread):
                 self._autoFriendThread_work()
         else:
             self._setLogLable('无法找到主页')
-        self._setLogLable('SUCCESS')
 
     def _autoFriendThread_work(self):
         if not ut.getFlag():
@@ -150,7 +146,6 @@ class WorkThread(QThread):
             ut.sleep()
             self._onceBattleRound()
         self._returnHome()
-        self._setLogLable('SUCCESS')
 
 
     # -------------------------tool--------------------

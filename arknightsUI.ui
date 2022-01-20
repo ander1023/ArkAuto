@@ -88,7 +88,7 @@ background-color:rgba(0,0,0,0.3);
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -101,7 +101,7 @@ background-color:rgba(0,0,0,0.3);
      <item>
       <widget class="QPushButton" name="autoFriendsBt">
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string/>
        </property>
        <property name="text">
         <string>好友访问</string>
@@ -139,7 +139,7 @@ background-color:rgba(0,0,0,0.3);
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>80</x>

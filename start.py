@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QMessageBox
 
 from ArknightsThread import WorkThread
 from arknightsUI import Ui_MainWindow
-from arknightsBeanAndUtils import  ut
+from arknightsBeanAndUtils import ut
 
 from HitokotoApi import getHitokotoText
 
@@ -36,23 +36,27 @@ class MainUI(QMainWindow):
         self.ui.setupUi(self)
         self.setWindowTitle('Arknights by大山猛')
         self.setWindowIcon(QIcon('ui_img/icon.jpg'))
+        self.setFixedSize(self.width(), self.height())
+        win32gui.SetWindowPos(self.winId(), win32con.HWND_TOPMOST, self.x() - 7, self.y(), self.width(), self.height(),
+                              win32con.SWP_SHOWWINDOW)
 
         self.ui.expMapBt.clicked.connect(self.exp_5)
         self.ui.devConnectBt.clicked.connect(self.connectDev)
         self.ui.startGameBt.clicked.connect(self.launchGame)
         self.ui.autoFriendsBt.clicked.connect(self.autoFriend)
         self.ui.autoCountBt.clicked.connect(self.autoCount)
-        self.ui.stopAllBt.clicked.connect(self.stop)
+        self.ui.stopAllBt.clicked.connect(self.closeMainThread)
         self.ui.setTopBt.clicked.connect(self.setTopBt)
 
-        self.ui.expMapBt.setStatusTip('自动开始经验五')
+        self.ui.expMapBt.setStatusTip('请在首页点击 开始经验五')
         self.ui.devConnectBt.setStatusTip('连接设备 默认雷电')
         self.ui.startGameBt.setStatusTip('自动启动游戏至首页')
         self.ui.autoFriendsBt.setStatusTip('自动拜访好友基建')
         self.ui.autoCountBt.setStatusTip('战斗页面自动循环（提前开启自动代理）')
         self.ui.stopAllBt.setStatusTip('停止现有任务')
         self.ui.setTopBt.setStatusTip('窗口是否置顶')
-
+        self.ui.logLable.setStatusTip('状态')
+        self.ui.lineEdit.setStatusTip('0 清完体力（不喝药）')
 
     def initThread(self):
         self.MThread_Signal.connect(self.WThread.getSignal)
@@ -60,87 +64,73 @@ class MainUI(QMainWindow):
         # self.signal.emit()
 
     def closeMainThread(self):
-        if self.WThread.isRunning():
+        try:
+            if self.WThread.isRunning():
+                self.setLogLable('结束任务')
+            else:
+                self.setLogLable('SUCCESS')
             ut.setFlagF()
-            self.setLogLable('结束任务')
-            try:
-                self.WThread.quit()
-                self.WThread.wait()
-            except:
-                pass
+
+        except:
+            pass
 
     # def initHitokoto(self):
     #     self.haT.start()
     #     self.haT.sinOut.connect(self.HitokotoThread_callback)
     def setTopBt(self):
         if self.sender().isChecked():
-            win32gui.SetWindowPos(self.winId(),win32con.HWND_TOPMOST,self.x()-7,self.y(),self.width(),self.height(),win32con.SWP_SHOWWINDOW)
+            win32gui.SetWindowPos(self.winId(), win32con.HWND_TOPMOST, self.x() - 7, self.y(), self.width(),
+                                  self.height(), win32con.SWP_SHOWWINDOW)
         else:
-            win32gui.SetWindowPos(self.winId(),win32con.HWND_NOTOPMOST,self.x()-7,self.y(),self.width(),self.height(),win32con.SWP_SHOWWINDOW)
+            win32gui.SetWindowPos(self.winId(), win32con.HWND_NOTOPMOST, self.x() - 7, self.y(), self.width(),
+                                  self.height(), win32con.SWP_SHOWWINDOW)
 
-    def startFun(self,funName):
+    def startFun(self, funName):
+        # f = False
+        # self.ui.expMapBt.setClickable(f)
+        # self.ui.devConnectBt.setClickable(f)
+        # self.ui.startGameBt.setClickable(f)
+        # self.ui.autoFriendsBt.setClickable(f)
+        # self.ui.autoCountBt.setClickable(f)
+        # self.ui.stopAllBt.clicked.connect(True)
+
         if not ut.isConnect() and funName != 'connectDevThread':
             self.setLogLable('请连接后重试')
             return
         if not self.WThread.isRunning():
             self.WThread.start()
         self.MThread_Signal.emit(funName)
-    def connectDev(self):self.startFun('connectDevThread')
-    def launchGame(self):self.startFun('launchGameThread')
-    def exp_5(self):self.startFun('exp_5Thread')
-    def autoFriend(self):self.startFun('autoFriendThread')
-    def stop(self):self.self.closeMainThread()
+
+    def connectDev(self):
+        self.startFun('connectDevThread')
+
+    def launchGame(self):
+        self.startFun('launchGameThread')
+
+    def exp_5(self):
+        self.startFun('exp_5Thread')
+
+    def autoFriend(self):
+        self.startFun('autoFriendThread')
+
     def autoCount(self):
         try:
             autoCount = int(self.ui.lineEdit.text())
             if autoCount < 0:
                 self.setLogLable('请填写正确阿拉伯数字')
                 return
-            self.startFun('["autoCountThread",'+str(autoCount)+']')
+            self.startFun('["autoCountThread",' + str(autoCount) + ']')
         except:
             pass
-    # def btEven(self):
-    #     if not self.WThread.isRunning():
-    #         self.WThread.start()
-    #     if self.sender().text() == '连接设备':
-    #         self.MThread_Signal.emit('connectDevThread')
-    #     elif not self.isConnect:
-    #         self.setLogLable('请连接后重试')
-    #         return
-    #     else:
-    #         if self.sender().text() == '启动游戏':
-    #             self.setLogLable('正在进入游戏')
-    #             self.MThread_Signal.emit('launchGameThread')
-    #         if self.sender().text() == '开始刷本':
-    #             self.MThread_Signal.emit('exp_5Thread')
-    #         if self.sender().text() == '好友访问':
-    #             self.MThread_Signal.emit('autoFriendThread')
-    #         if self.sender().text() == '停止':
-    #             self.closeMainThread()
-    #         if self.sender().text() == '自动刷本':
-    #             autoCount = -1
-    #             try:
-    #                 autoCount = int(self.ui.lineEdit.text())
-    #
-    #                 if autoCount < 0:
-    #                     self.setLogLable('请填写正确阿拉伯数字')
-    #                     return
-    #                 self.MThread_Signal.emit('["autoCountThread",'+str(autoCount)+']')
-    #             except:
-    #                 pass
-    #                 # self.setLogLable('请填写正确阿拉伯数字')
-    #             self.MThread_Signal.emit('autoCountThread')
-
 
     # ------------------------------------tools-----------------------------------
     def setLogLable(self, text):
-        self.ui.logLable.setText(text+'\n'+time.strftime("%H:%M:%S", time.localtime()))
+        self.ui.logLable.setText(text + '\n' + time.strftime("%H:%M:%S", time.localtime()))
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     ui = MainUI()
-    ui.setFixedSize(ui.width(), ui.height())
     ui.show()
     sys.exit(app.exec_())
     # todo 添加置顶按钮

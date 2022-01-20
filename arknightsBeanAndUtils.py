@@ -65,10 +65,10 @@ class Utils:
     def __init__(self):
         self._dev = None
         self.flag = False
-
     def connectDev(self):
         try:
             self._dev = Android('emulator-5554')
+            # print(self._dev.get_default_device())
         except:
             pass
 
@@ -127,7 +127,7 @@ class Utils:
 
     def isConnect(self):
         try:
-            if self._dev.avaliable:
+            if self._dev.get_default_device():
                 return True
             return False
         except:
