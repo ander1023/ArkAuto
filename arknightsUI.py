@@ -15,7 +15,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
-        MainWindow.resize(659, 460)
+        MainWindow.resize(382, 256)
         MainWindow.setStyleSheet("*{\n"
 "font-family: \"Microsoft YaHei\";\n"
 "font-weight:bold;\n"
@@ -32,18 +32,18 @@ class Ui_MainWindow(object):
 "font-weight:bold\n"
 "}\n"
 "\n"
-"QPushButton,QCheckBox{\n"
+"QPushButton,QCheckBox,Qmenu{\n"
 "border-image:none;\n"
 "border:2px solid rgba(255,255,255,0.4);\n"
 "background:rgba(255,255,255,0.7);\n"
 "height:30px;\n"
 "border-radius:4px\n"
 "}\n"
-"QPushButton:pressed,QCheckBox:pressed{\n"
+"QPushButton:pressed,QCheckBox:pressed,Qmenu:pressed{\n"
 "background-color:rgba(0,0,0,0.5);\n"
 "color:rgba(255,255,255)\n"
 "}\n"
-"QPushButton:hover,QCheckBox:hover{\n"
+"QPushButton:hover,QCheckBox:hover,Qmenu:hover{\n"
 "background-color:rgba(0,0,0,0.3);\n"
 "}\n"
 "")
@@ -57,7 +57,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.centralwidget.setObjectName("centralwidget")
         self.logLable = QtWidgets.QLabel(self.centralwidget)
-        self.logLable.setGeometry(QtCore.QRect(150, 50, 371, 71))
+        self.logLable.setGeometry(QtCore.QRect(4, 0, 371, 71))
         font = QtGui.QFont()
         font.setFamily("Microsoft YaHei")
         font.setPointSize(-1)
@@ -68,7 +68,7 @@ class Ui_MainWindow(object):
         self.logLable.setAlignment(QtCore.Qt.AlignCenter)
         self.logLable.setObjectName("logLable")
         self.layoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget.setGeometry(QtCore.QRect(80, 280, 361, 59))
+        self.layoutWidget.setGeometry(QtCore.QRect(10, 127, 361, 59))
         self.layoutWidget.setObjectName("layoutWidget")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.layoutWidget)
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -81,13 +81,13 @@ class Ui_MainWindow(object):
         self.expMapBt.setObjectName("expMapBt")
         self.horizontalLayout_2.addWidget(self.expMapBt)
         self.setTopBt = QtWidgets.QCheckBox(self.centralwidget)
-        self.setTopBt.setGeometry(QtCore.QRect(10, 10, 61, 31))
+        self.setTopBt.setGeometry(QtCore.QRect(10, 10, 51, 21))
         self.setTopBt.setStyleSheet("")
         self.setTopBt.setChecked(True)
         self.setTopBt.setTristate(False)
         self.setTopBt.setObjectName("setTopBt")
         self.layoutWidget1 = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget1.setGeometry(QtCore.QRect(80, 360, 539, 69))
+        self.layoutWidget1.setGeometry(QtCore.QRect(10, 174, 361, 69))
         self.layoutWidget1.setObjectName("layoutWidget1")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.layoutWidget1)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
@@ -102,24 +102,33 @@ class Ui_MainWindow(object):
         self.startGameBt.setObjectName("startGameBt")
         self.horizontalLayout.addWidget(self.startGameBt)
         self.widget_3 = QtWidgets.QWidget(self.centralwidget)
-        self.widget_3.setGeometry(QtCore.QRect(80, 200, 181, 57))
+        self.widget_3.setGeometry(QtCore.QRect(9, 70, 181, 57))
         self.widget_3.setObjectName("widget_3")
         self.autoCountBt = QtWidgets.QPushButton(self.widget_3)
-        self.autoCountBt.setGeometry(QtCore.QRect(0, 26, 171, 30))
+        self.autoCountBt.setGeometry(QtCore.QRect(0, 26, 181, 30))
         self.autoCountBt.setToolTip("")
         self.autoCountBt.setObjectName("autoCountBt")
         self.label = QtWidgets.QLabel(self.widget_3)
-        self.label.setGeometry(QtCore.QRect(10, 0, 101, 16))
+        self.label.setGeometry(QtCore.QRect(0, 0, 101, 16))
         self.label.setStyleSheet("*{\n"
 "font-size:15px;\n"
 "}")
         self.label.setObjectName("label")
         self.lineEdit = QtWidgets.QLineEdit(self.widget_3)
-        self.lineEdit.setGeometry(QtCore.QRect(130, 0, 41, 20))
+        self.lineEdit.setGeometry(QtCore.QRect(140, 0, 41, 20))
         self.lineEdit.setStyleSheet("*{border-image:none;\n"
 "background:rgba(255,255,255,0.7);\n"
 "border-radius:4px}")
         self.lineEdit.setObjectName("lineEdit")
+        self.autoCountBt.raise_()
+        self.label.raise_()
+        self.lineEdit.raise_()
+        self.layoutWidget.raise_()
+        self.logLable.raise_()
+        self.layoutWidget.raise_()
+        self.layoutWidget.raise_()
+        self.widget_3.raise_()
+        self.setTopBt.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusBar = QtWidgets.QStatusBar(MainWindow)
         self.statusBar.setObjectName("statusBar")

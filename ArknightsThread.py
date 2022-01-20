@@ -165,6 +165,7 @@ class WorkThread(QThread):
             return
         self._setLogLable('开始行动')
         ut.touchName('战斗准备')
+        #todo 添加按钮判断
         if self._outRealize():
             return False
             # todo 如果outRealize方法修改 则判断没有药时为false
@@ -181,7 +182,7 @@ class WorkThread(QThread):
                 ut.sleep(5)
                 self._setLogLable('剿灭完成')
             if ut.img_match('战斗完成'):
-                ut.sleep(10)
+                ut.sleep(5)
                 self._setLogLable('战斗完成')
                 ut.touchName('战斗完成')
                 return True
