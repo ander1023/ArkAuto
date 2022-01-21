@@ -38,7 +38,7 @@ class MainUI(QMainWindow):
         self.setWindowTitle('Arknights by大山猛')
         self.setWindowIcon(QIcon('ui_img/icon.jpg'))
         self.setFixedSize(self.width(), self.height())
-
+        # self.setWindowFlag(Qt.FramelessWindowHint)
 
         self.ui.expMapBt.clicked.connect(self.exp_5)
         self.ui.devConnectBt.clicked.connect(self.connectDev)
@@ -59,10 +59,10 @@ class MainUI(QMainWindow):
         self.ui.stopAllBt.setStatusTip('停止现有任务')
         self.ui.setTopBt.setStatusTip('窗口是否置顶')
         self.ui.logLable.setStatusTip('状态')
-        self.ui.lineEdit.setStatusTip('0 清完体力（不喝药）')
+        self.ui.lineEdit.setStatusTip('0 清完体力（不喝药不碎石）')
         self.ui.shutdownBt.setStatusTip('弹出关机界面')
-        self.ui.autoBuildBt.setStatusTip('基建人员任务')
-        self.ui.togetherBt.setStatusTip('经验5 好友拜访 基建')
+        self.ui.autoBuildBt.setStatusTip('基建换人')
+        self.ui.togetherBt.setStatusTip('经验五 好友拜访 基建')
         #todo 差个商店
 
 

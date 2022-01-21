@@ -22,7 +22,7 @@ class WorkThread(QThread):
         ut.setFlagT()
         if self.signal_str == None:
             return
-        self._setLogLable('任务启动中: '+ self.signal_str[:-6])
+        self._setLogLable('任务启动中')
 
 
 
@@ -134,7 +134,6 @@ class WorkThread(QThread):
             ut.sleep(1)
 
             if ut.img_match('下一位亮'):
-                # todo 判断出错暂未解决
                 # 已解决 路径出错 & 灰度图片对比
                 self._touch('访问下一位')
             else:
@@ -173,10 +172,11 @@ class WorkThread(QThread):
             #处理通知
             ut.sleep()
             if ut.img_match('蓝色通知1'):
-                # todo 蓝色通知2
                 self._touch('蓝色通知1')
+            elif ut.img_match('蓝色通知2'):
+                self._touch('蓝色通知2')
                 while ut.getFlag():
-                    if ut.img_match('可收获') or ut.img_match('可交付'):
+                    if ut.img_match('可收获') or ut.img_match('可交付') or ut.img_match('收取信赖'):
                         self._touch('底部通知')
                     else:
                         break
@@ -324,7 +324,6 @@ class WorkThread(QThread):
     def _enterBattle(self):
         self._isCheckAuto()
         self._touch('战斗准备')
-        # todo 添加按钮判断
         if self._outRealize():
             return False
             # todo 如果outRealize方法修改 则判断没有药时为false
