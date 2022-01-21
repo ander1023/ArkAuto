@@ -22,7 +22,11 @@ class WorkThread(QThread):
         ut.setFlagT()
         if self.signal_str == None:
             return
-        self._setLogLable('任务启动中')
+        self._setLogLable('任务启动中: '+ self.signal_str[:-6])
+
+
+
+
         if self.signal_str == 'exp_5Thread':
             self.exp_5Thread()
         if self.signal_str == 'connectDevThread':
@@ -34,7 +38,17 @@ class WorkThread(QThread):
         if self.signal_str == 'autoCountThread':
             self.autoCountThread()
         if self.signal_str == 'autoBuildBt':
-            self.autoBuild()
+            self.autoBuildThread()
+        if self.signal_str == 'togetherBt':
+            self.exp_5Thread()
+            ut.sleep(5)
+            self.autoFriendThread()
+            ut.sleep(5)
+            self.autoBuildThread()
+
+
+
+
         time.sleep(1)
         self._setLogLable('SUCCESS')
 
@@ -151,7 +165,7 @@ class WorkThread(QThread):
             else:
                 break
         self._returnHome()
-    def autoBuild(self):
+    def autoBuildThread(self):
         #todo 所有发电站，第一个贸易站、交易站需要自定位置（other person）修改
 
         if ut.img_match('主页设置按钮'):
@@ -187,6 +201,11 @@ class WorkThread(QThread):
                 self.sleep()
                 return
             #开始控制中枢
+            ut.sleep()
+            if not ut.img_match('第一个宿舍'):
+                self._setLogLable('任务出错')
+                self.sleep()
+                return
             self._touch('控制中枢')
             self._autoBuildHostelWork()
             #开始办公室
@@ -195,7 +214,14 @@ class WorkThread(QThread):
             #开始会客室
             self._touch('会客室')
             self._autoBuildHostelWork(2)
+
+
             #开始贸易站
+            ut.sleep()
+            if not ut.img_match('第一个宿舍'):
+                self._setLogLable('任务出错')
+                self.sleep()
+                return
             self._touch('贸易站')
             self._touch('查看订单')
             self._autoBuildDealWork()
@@ -206,6 +232,11 @@ class WorkThread(QThread):
             self._touchFast('返回')
             self._touchFast('返回')
             #开始制造站
+            ut.sleep()
+            if not ut.img_match('第一个宿舍'):
+                self._setLogLable('任务出错')
+                self.sleep()
+                return
             self._touch('制造站')
             self._touch('查看订单')
             self._autoBuildDealWork()
@@ -216,6 +247,11 @@ class WorkThread(QThread):
             self._touchFast('返回')
             self._touchFast('返回')
             #开始发电站
+            ut.sleep()
+            if not ut.img_match('第一个宿舍'):
+                self._setLogLable('任务出错')
+                self.sleep()
+                return
             self._touch('发电站1')
             self._autoBuildHostelWork(1)
             self._touch('发电站2')
@@ -230,7 +266,7 @@ class WorkThread(QThread):
         else:
             if self._returnHome():
                 ut.sleep(5)
-                self.autoBuild()
+                self.autoBuildThread()
             else:
                 self._setLogLable('找不到主页')
                 ut.sleep()
@@ -260,17 +296,20 @@ class WorkThread(QThread):
             self._touchFast('位置4')
             self._touchFast('位置5')
         self._touch('确认')
+        if ut.img_match('排班替换提示'):
+            self._touch('排班替换确认')
         self._touch('返回')
     def _autoBuildDealWork(self):
-        self._touchFast('人员')
+        self._touch('人员')
         self._touch('清空选择')
-        self._touchFast('确认')
-        self._touchFast('人员')
+        self._touch('确认')
+        self._touch('人员')
         self._touchFast('位置1')
         self._touchFast('位置2')
         self._touchFast('位置3')
-        self._touchFast('确认')
-
+        self._touch('确认')
+        if ut.img_match('排班替换提示'):
+            self._touch('排班替换确认')
     # -------------------------tool--------------------
     def _touch(self,name):
         if not ut.getFlag():

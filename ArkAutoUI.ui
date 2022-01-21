@@ -254,12 +254,26 @@ border-radius:4px}</string>
      <string>关机</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="togetherBt">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>80</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>一键三连</string>
+    </property>
+   </widget>
    <zorder>logLable</zorder>
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
    <zorder>widget_3</zorder>
    <zorder>setTopBt</zorder>
    <zorder>shutdownBt</zorder>
+   <zorder>togetherBt</zorder>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>

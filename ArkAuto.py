@@ -49,6 +49,7 @@ class MainUI(QMainWindow):
         self.ui.setTopBt.clicked.connect(self.setTopBt)
         self.ui.shutdownBt.clicked.connect(self.shutdownBt)
         self.ui.autoBuildBt.clicked.connect(self.autoBuildBt)
+        self.ui.togetherBt.clicked.connect(self.togetherBt)
 
         self.ui.expMapBt.setStatusTip('请在首页点击 开始经验五')
         self.ui.devConnectBt.setStatusTip('连接设备 默认雷电')
@@ -59,7 +60,11 @@ class MainUI(QMainWindow):
         self.ui.setTopBt.setStatusTip('窗口是否置顶')
         self.ui.logLable.setStatusTip('状态')
         self.ui.lineEdit.setStatusTip('0 清完体力（不喝药）')
-        self.ui.shutdownBt.setStatusTip('点击弹出关机界面')
+        self.ui.shutdownBt.setStatusTip('弹出关机界面')
+        self.ui.autoBuildBt.setStatusTip('基建人员任务')
+        self.ui.togetherBt.setStatusTip('经验5 好友拜访 基建')
+        #todo 差个商店
+
 
     def initThread(self):
         self.MThread_Signal.connect(self.WThread.getSignal)
@@ -129,6 +134,8 @@ class MainUI(QMainWindow):
         os.system('start ./WinShutdown.py')
     def autoBuildBt(self):
         self.startFun('autoBuildBt')
+    def togetherBt(self):
+        self.startFun('togetherBt')
     # ------------------------------------tools-----------------------------------
     def setLogLable(self, text):
         self.ui.logLable.setText(text + '\n' + time.strftime("%H:%M:%S", time.localtime()))
