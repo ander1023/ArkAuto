@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/adbAuto.iml" filepath="$PROJECT_DIR$/.idea/adbAuto.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ArkAuto.iml" filepath="$PROJECT_DIR$/.idea/ArkAuto.iml" />
     </modules>
   </component>
 </project>

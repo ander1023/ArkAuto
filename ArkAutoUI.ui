@@ -109,6 +109,13 @@ background-color:rgba(0,0,0,0.3);
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="autoBuildBt">
+       <property name="text">
+        <string>基建</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="expMapBt">
        <property name="text">
         <string>经验五</string>

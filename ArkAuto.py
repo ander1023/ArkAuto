@@ -48,6 +48,8 @@ class MainUI(QMainWindow):
         self.ui.stopAllBt.clicked.connect(self.closeMainThread)
         self.ui.setTopBt.clicked.connect(self.setTopBt)
         self.ui.shutdownBt.clicked.connect(self.shutdownBt)
+        self.ui.autoBuildBt.clicked.connect(self.autoBuildBt)
+
         self.ui.expMapBt.setStatusTip('请在首页点击 开始经验五')
         self.ui.devConnectBt.setStatusTip('连接设备 默认雷电')
         self.ui.startGameBt.setStatusTip('启动游戏至首页')
@@ -125,6 +127,8 @@ class MainUI(QMainWindow):
             pass
     def shutdownBt(self):
         os.system('start ./WinShutdown.py')
+    def autoBuildBt(self):
+        self.startFun('autoBuildBt')
     # ------------------------------------tools-----------------------------------
     def setLogLable(self, text):
         self.ui.logLable.setText(text + '\n' + time.strftime("%H:%M:%S", time.localtime()))
