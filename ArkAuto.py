@@ -139,7 +139,8 @@ class MainUI(QMainWindow):
     # ------------------------------------tools-----------------------------------
     def setLogLable(self, text):
         self.ui.logLable.setText(text + '\n' + time.strftime("%H:%M:%S", time.localtime()))
-
+    def __del__(self):
+        os.system('adb kill-server')
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
