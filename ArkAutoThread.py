@@ -198,13 +198,13 @@ class WorkThread(QThread):
                 self._autoBuildHostelWork()
             else:
                 self._setLogLable('不在基建内')
-                self.sleep()
+                ut.sleep()
                 return
             #开始控制中枢
             ut.sleep()
             if not ut.img_match('第一个宿舍'):
                 self._setLogLable('任务出错')
-                self.sleep()
+                ut.sleep()
                 return
             self._touch('控制中枢')
             self._autoBuildHostelWork()
@@ -220,7 +220,7 @@ class WorkThread(QThread):
             ut.sleep()
             if not ut.img_match('第一个宿舍'):
                 self._setLogLable('任务出错')
-                self.sleep()
+                ut.sleep()
                 return
             self._touch('贸易站')
             self._touch('查看订单')
@@ -235,7 +235,7 @@ class WorkThread(QThread):
             ut.sleep()
             if not ut.img_match('第一个宿舍'):
                 self._setLogLable('任务出错')
-                self.sleep()
+                ut.sleep()
                 return
             self._touch('制造站')
             self._touch('查看订单')
@@ -250,7 +250,7 @@ class WorkThread(QThread):
             ut.sleep()
             if not ut.img_match('第一个宿舍'):
                 self._setLogLable('任务出错')
-                self.sleep()
+                ut.sleep()
                 return
             self._touch('发电站1')
             self._autoBuildHostelWork(1)
