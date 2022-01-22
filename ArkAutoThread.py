@@ -175,17 +175,17 @@ class WorkThread(QThread):
                 self._touch('蓝色通知1')
             elif ut.img_match('蓝色通知2'):
                 self._touch('蓝色通知2')
-                while ut.getFlag():
-                    if ut.img_match('可收获') or ut.img_match('可交付') or ut.img_match('收取信赖'):
-                        self._touch('底部通知')
-                    else:
-                        break
-                    ut.sleep()
-                self._touch('返回')
-                if ut.img_match('基建确认退出'):
-                    self._touch('基建确认退出')
-                    ut.sleep(5)
-                    self._touch('首页基建')
+            while ut.getFlag():
+                if ut.img_match('可收获') or ut.img_match('可交付') or ut.img_match('收取信赖'):
+                    self._touch('底部通知')
+                else:
+                    break
+                ut.sleep()
+            self._touch('返回')
+            if ut.img_match('基建确认退出'):
+                self._touch('基建确认退出')
+                ut.sleep(5)
+                self._touch('首页基建')
             #开始任务宿舍
             if ut.img_match('第一个宿舍'):
                 self._touch('宿舍1')
