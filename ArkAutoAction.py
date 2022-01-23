@@ -139,6 +139,7 @@ class WorkThread(QThread):
             if ut.img_match('下一位亮'):
                 # 已解决 路径出错 & 灰度图片对比
                 self._touch('访问下一位')
+                ut.sleep(3)
             else:
                 self._returnHome()
                 self._setLogLable('好友访问完成')
