@@ -10,6 +10,7 @@ from PyQt5.QtCore import QThread, pyqtSignal, Qt
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QMessageBox
 
 from ArkAutoAction import WorkThread
+from ArkAutoUtilsAction import UtilsThread
 from ArkAutoUI import Ui_MainWindow
 from ArkAutoUtilesArgs import ut
 
@@ -18,13 +19,16 @@ from ArkAutoUtilesArgs import ut
 import sys
 
 
+
+
 class MainUI(QMainWindow):
-    MThread_Signal = pyqtSignal(str)
+    WorkThread_Signal = pyqtSignal(str)#往线程发送
+    UtilsThread_Signal = pyqtSignal(str)#往线程发送
 
     def __init__(self):
         super(MainUI, self).__init__()
         self.ui = None
-        self.WThread = WorkThread()
+
         self.initUI()
         self.initThread()
         # self.initHitokoto()
@@ -50,7 +54,9 @@ class MainUI(QMainWindow):
         self.ui.shutdownBt.clicked.connect(self.shutdownBt)
         self.ui.autoBuildBt.clicked.connect(self.autoBuildBt)
         self.ui.togetherBt.clicked.connect(self.togetherBt)
+
         self.ui.openDownBt.clicked.connect(self.openDownBt)
+        self.ui.openWikiBt.clicked.connect(self.openWikiBt)
 
         self.ui.expMapBt.setStatusTip('请在首页点击 开始经验五')
         self.ui.devConnectBt.setStatusTip('连接设备 默认雷电')
@@ -69,13 +75,17 @@ class MainUI(QMainWindow):
 
 
     def initThread(self):
-        self.MThread_Signal.connect(self.WThread.getSignal)
-        self.WThread.signal.connect(self.setLogLable)
+        self.WorkThread = WorkThread()
+        self.UtilsThread = UtilsThread()
+        self.WorkThread_Signal.connect(self.WorkThread.getSignal)#发送
+        self.WorkThread.signal.connect(self.setLogLable)#接收
+
+        self.UtilsThread_Signal.connect(self.UtilsThread.getSignal)
         # self.signal.emit()
 
     def closeMainThread(self):
         try:
-            if self.WThread.isRunning():
+            if self.WorkThread.isRunning():
                 self.setLogLable('结束任务')
             else:
                 self.setLogLable('SUCCESS')
@@ -95,7 +105,7 @@ class MainUI(QMainWindow):
             win32gui.SetWindowPos(self.winId(), win32con.HWND_NOTOPMOST, self.x() - 7, self.y(), self.width(),
                                   self.height(), win32con.SWP_SHOWWINDOW)
 
-    def startFun(self, funName):
+    def startWorkFun(self, funName):
         # f = False
         # self.ui.expMapBt.setClickable(f)
         # self.ui.devConnectBt.setClickable(f)
@@ -107,21 +117,24 @@ class MainUI(QMainWindow):
         if not ut.isConnect() and funName != 'connectDevThread':
             self.setLogLable('请连接后重试')
             return
-        if not self.WThread.isRunning():
-            self.WThread.start()
-        self.MThread_Signal.emit(funName)
-
+        if not self.WorkThread.isRunning():
+            self.WorkThread.start()
+        self.WorkThread_Signal.emit(funName)
+    def startUtilsFun(self,funName):
+        if not self.UtilsThread.isRunning():
+            self.UtilsThread.start()
+        self.UtilsThread_Signal.emit(funName)
     def connectDev(self):
-        self.startFun('connectDevThread')
+        self.startWorkFun('connectDevThread')
 
     def launchGame(self):
-        self.startFun('launchGameThread')
+        self.startWorkFun('launchGameThread')
 
     def exp_5(self):
-        self.startFun('exp_5Thread')
+        self.startWorkFun('exp_5Thread')
 
     def autoFriend(self):
-        self.startFun('autoFriendThread')
+        self.startWorkFun('autoFriendThread')
 
     def autoCount(self):
         try:
@@ -129,17 +142,20 @@ class MainUI(QMainWindow):
             if autoCount < 0:
                 self.setLogLable('请填写正确阿拉伯数字')
                 return
-            self.startFun('["autoCountThread",' + str(autoCount) + ']')
+            self.startWorkFun('["autoCountThread",' + str(autoCount) + ']')
         except:
             pass
     def shutdownBt(self):
         os.system('start ./WinShutdown.py')
     def autoBuildBt(self):
-        self.startFun('autoBuildBt')
+        self.startWorkFun('autoBuildBt')
     def togetherBt(self):
-        self.startFun('togetherBt')
+        self.startWorkFun('togetherBt')
     def openDownBt(self):
-        self.startFun('openDownBt')
+        self.startUtilsFun('openDownBt')
+    def openWikiBt(self):
+        self.startUtilsFun('openWikiBt')
+
     # ------------------------------------tools-----------------------------------
     def setLogLable(self, text):
         self.ui.logLable.setText(text + '\n' + time.strftime("%H:%M:%S", time.localtime()))

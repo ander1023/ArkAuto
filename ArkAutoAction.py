@@ -314,8 +314,7 @@ class WorkThread(QThread):
         self._touch('确认')
         if ut.img_match('排班替换提示'):
             self._touch('排班替换确认')
-    def openDownBtThread(self):
-        os.system('start ./掉落图.png')
+
     # -------------------------tool--------------------
     def _touch(self,name):
         if not ut.getFlag():

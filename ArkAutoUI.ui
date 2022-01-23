@@ -149,32 +149,28 @@ border-radius:4px}</string>
       <string>0</string>
      </property>
     </widget>
-    <zorder>autoCountBt</zorder>
-    <zorder>label</zorder>
-    <zorder>lineEdit</zorder>
-    <zorder>layoutWidget</zorder>
    </widget>
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
       <x>280</x>
-      <y>66</y>
+      <y>67</y>
       <width>101</width>
-      <height>81</height>
+      <height>76</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QPushButton" name="togetherBt">
+      <widget class="QPushButton" name="openWikiBt">
        <property name="text">
-        <string>一键三连</string>
+        <string>Wiki</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="openDownBt">
        <property name="text">
-        <string>打开掉落图</string>
+        <string>掉落图</string>
        </property>
       </widget>
      </item>
@@ -184,9 +180,9 @@ border-radius:4px}</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>0</y>
+      <y>5</y>
       <width>61</width>
-      <height>71</height>
+      <height>76</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -279,6 +275,19 @@ border-radius:4px}</string>
       </layout>
      </item>
     </layout>
+   </widget>
+   <widget class="QPushButton" name="togetherBt">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>6</y>
+      <width>99</width>
+      <height>33</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>一键三连</string>
+    </property>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
