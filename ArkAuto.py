@@ -9,9 +9,9 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QThread, pyqtSignal, Qt
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QMessageBox
 
-from ArkAutoThread import WorkThread
+from ArkAutoAction import WorkThread
 from ArkAutoUI import Ui_MainWindow
-from ArkAutoBeanAndUtils import ut
+from ArkAutoUtilesArgs import ut
 
 # from HitokotoApi import getHitokotoText
 
@@ -50,6 +50,7 @@ class MainUI(QMainWindow):
         self.ui.shutdownBt.clicked.connect(self.shutdownBt)
         self.ui.autoBuildBt.clicked.connect(self.autoBuildBt)
         self.ui.togetherBt.clicked.connect(self.togetherBt)
+        self.ui.openDownBt.clicked.connect(self.openDownBt)
 
         self.ui.expMapBt.setStatusTip('请在首页点击 开始经验五')
         self.ui.devConnectBt.setStatusTip('连接设备 默认雷电')
@@ -63,6 +64,7 @@ class MainUI(QMainWindow):
         self.ui.shutdownBt.setStatusTip('弹出关机界面')
         self.ui.autoBuildBt.setStatusTip('基建换人')
         self.ui.togetherBt.setStatusTip('经验五 好友拜访 基建')
+        # self.ui.openDownBt.setStatusTip('打开掉落图')
         #todo 差个商店
 
 
@@ -136,6 +138,8 @@ class MainUI(QMainWindow):
         self.startFun('autoBuildBt')
     def togetherBt(self):
         self.startFun('togetherBt')
+    def openDownBt(self):
+        self.startFun('openDownBt')
     # ------------------------------------tools-----------------------------------
     def setLogLable(self, text):
         self.ui.logLable.setText(text + '\n' + time.strftime("%H:%M:%S", time.localtime()))

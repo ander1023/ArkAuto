@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
+import os
 import time
 
 from PyQt5.QtCore import QThread, pyqtSignal
 
 # from HitokotoApi import getHitokotoText
-from ArkAutoBeanAndUtils import ut
+from ArkAutoUtilesArgs import ut
 
 # -----------------------------------Thread-----------------------------------
 class WorkThread(QThread):
@@ -39,6 +40,8 @@ class WorkThread(QThread):
             self.autoCountThread()
         if self.signal_str == 'autoBuildBt':
             self.autoBuildThread()
+        if self.signal_str == 'openDownBt':
+            self.openDownBtThread()
         if self.signal_str == 'togetherBt':
             self.exp_5Thread()
             ut.sleep(5)
@@ -310,6 +313,8 @@ class WorkThread(QThread):
         self._touch('确认')
         if ut.img_match('排班替换提示'):
             self._touch('排班替换确认')
+    def openDownBtThread(self):
+        os.system('start ./掉落图.png')
     # -------------------------tool--------------------
     def _touch(self,name):
         if not ut.getFlag():
