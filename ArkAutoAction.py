@@ -156,13 +156,12 @@ class WorkThread(QThread):
                 else:
                     self._returnHome()
                     return
-                ut.sleep()
-
+                ut.sleep(10)
         for i in range(1, ac + 1):
             if not ut.getFlag():
                 return
             self._setLogLable('次数：' + str(i) + '次 还剩：' + str(ac + 1 - i) + '次')
-            ut.sleep()
+            ut.sleep(5)
             if self._enterBattle():
                 self._whileWaitBattleComplete()
             else:
@@ -379,7 +378,8 @@ class WorkThread(QThread):
         if ut.img_match('代理指挥'):
             pass
         else:
-            self._touch('代理指挥')
+            pass
+            # self._touch('代理指挥')
 
     def _setLogLable(self, text):
         if text != 'SUCCESS' and not ut.getFlag():
